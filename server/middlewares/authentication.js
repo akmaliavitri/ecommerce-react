@@ -26,8 +26,7 @@ module.exports = {
     if(access_token) {
       const decoded = jwt.verify(access_token, secretKey)
       req.userData = decoded
-      console.log("decodeD",decoded)
-      console.log("delete")
+      console.log("decoded:",decoded.email)
       next()
     } else {
       next()

@@ -5,18 +5,16 @@ const statusMessage = require("../helpers/status.message");
 module.exports = {
   addToChart: async (req, res) => {
     try {
-      let data = req.body;
-      const newChart = {
+      const newItem = {
         $push: {
           items: {
             product: req.params.id,
-            quantity: data.quantity,
+            quantity: req.body.quantity,
           },
         },
       };
-
-      const chart = await Chart.update(newChart);
-
+      const chart = await Chart.updateOne({user : req.userData.id}, newItem);
+  
       statusMessage(res, true, "success add item to chart", chart);
     } catch (error) {
       statusMessage(res, false, error.message);
@@ -25,7 +23,7 @@ module.exports = {
 
   getChart: async (req, res) => {
     try {
-      const chart = await Chart.find({}).populate({
+      const chart = await Chart.find({user : req.userData.id }).populate({
         path: 'items',
         populate: {
           path: 'product',
@@ -49,7 +47,7 @@ module.exports = {
         },
       };
 
-      const chart = await Chart.update(updateChart)
+      const chart = await Chart.updateOne({user : req.userData.id}, updateChart)
 
       statusMessage(res, true, 'success delete item from chart', chart)
     } catch (error) {
