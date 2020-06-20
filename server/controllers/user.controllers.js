@@ -1,8 +1,12 @@
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
 const User = require("../models/user");
+const Chart = require("../models/chart");
+
 const statusMessage = require("../helpers/status.message");
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const secretKey = 'akulagimakan'
+
+const secretKey = "akulagimakan";
 
 module.exports = {
   signUp: async (req, res) => {
@@ -17,37 +21,52 @@ module.exports = {
 
   signIn: async (req, res) => {
     try {
-      let { email, password } = req.body
-
+      let { email, password } = req.body;
+      // console.log(req.body)
       const user = await User.findOne({
-        email
-      })
+        email,
+      });
 
-      if(user) {
-        bcrypt.compare(user.password, password, (err, isMatch) => {
-          if(!err) {
-
-            const generateToken = jwt.sign({
+      if (user) {
+        const hashed = bcrypt.compare(user.password, password);
+       
+        if (hashed) {
+          const token = jwt.sign(
+            {
               id: user._id,
               username: user.username,
-              email: user.email
-            }, secretKey)
+              email: user.email,
+            },
+            secretKey
+          );
 
-            const payload = {generateToken, user}
-            //return res.status(200).json({message: 'sucess',payload, id: user._id})
-            statusMessage(res, true, 'success sign in', payload)
+          const payload = {
+            id: user._id,
+            token,
+          };
 
-          } else {
-            statusMessage(res, false, 'wrong email / password', null);
-          }
-        })
+          statusMessage(res, true, 'success sign in', payload)
+        } else {
+          statusMessage(res, false, "wrong email / password", null);
+        }
       } else {
-
-        statusMessage(res, false, 'wrong email / password', null);
+        statusMessage(res, false, "wrong email / password", null);
       }
     } catch (error) {
-      statusMessage(res, false, 'wrong email / password', null);
+      statusMessage(res, false, "something went wrong", null);
     }
-  }
+  },
 
+  getUser: async (req, res) => {
+    try {
+      const { id } = req.userData;
+
+      const user = await Chart.findOne({ user: id }).populate("user");
+
+      statusMessage(res, true, "success read user", user);
+    } catch (error) {
+      console.log(error);
+      statusMessage(res, false, "something went wrong", null);
+    }
+  },
 };

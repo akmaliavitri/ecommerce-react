@@ -5,31 +5,60 @@ const statusMessage = require("../helpers/status.message");
 module.exports = {
   addToChart: async (req, res) => {
     try {
-      const newItem = {
-        $push: {
-          items: {
-            product: req.params.id,
-            quantity: req.body.quantity,
-          },
-        },
-      };
-      const chart = await Chart.updateOne({user : req.userData.id}, newItem);
-  
+      const { id } = req.params;
+      const { quantity } = req.body;
+
+      const getChart = await Chart.findOne({ user: req.userData.id }).populate({
+        path: "items",
+      });
+
+      const isEmpty = [];
+      const payload = [];
+      const items = getChart.items;
+
+      items.forEach((item) => {
+        if (item.product.toString() === id) {
+          payload.push({
+            product: id,
+            quantity: Number(item.quantity) + Number(quantity),
+          });
+          isEmpty.push("check");
+        } else {
+          console.log("here else");
+          payload.push(item);
+        }
+      });
+
+      if (isEmpty.length === 0) {
+        console.log("new item push");
+        payload.push({ product: id, quantity });
+      }
+
+      const chart = await Chart.update(
+        { user: req.userData.id },
+        { items: payload }
+      );
+
       statusMessage(res, true, "success add item to chart", chart);
     } catch (error) {
       statusMessage(res, false, error.message);
     }
   },
 
+  incrementItemQty: async () => {},
+  decrementItemQty: async () => {},
+
   getChart: async (req, res) => {
     try {
-      const chart = await Chart.find({user : req.userData.id }).populate({
-        path: 'items',
-        populate: {
-          path: 'product',
-          model: 'Product'
-        }
-      }).populate('user')
+      const chart = await Chart.find({user : req.userData.id })
+        .populate({
+          path: "items",
+          populate: {
+            path: "product",
+            model: "Product",
+          },
+        })
+        .populate("user");
 
       statusMessage(res, true, "success to find product", chart);
     } catch (error) {
@@ -47,17 +76,20 @@ module.exports = {
         },
       };
 
-      const chart = await Chart.updateOne({user : req.userData.id}, updateChart)
+      const chart = await Chart.updateOne(
+        { user: req.userData.id },
+        updateChart
+      );
 
-      statusMessage(res, true, 'success delete item from chart', chart)
+      statusMessage(res, true, "success delete item from chart", chart);
     } catch (error) {
       statusMessage(res, false, error.message);
     }
   },
 
-  updateItem : async (req, res) => {
+  updateItem: async (req, res) => {
     try {
-      const { id } = req.params
+      const { id } = req.params;
       const updateChart = {
         $push: {
           items: {
@@ -65,12 +97,14 @@ module.exports = {
           },
         },
       };
-      
-      const chart = await Chart.findOneAndUpdate({ _id : id }, req.body, {$pull : req.userData.id})
-      console.log(chart)
-      statusMessage(res, true, 'success updated item', chart)
+
+      const chart = await Chart.findOneAndUpdate({ _id: id }, req.body, {
+        $pull: req.userData.id,
+      });
+      console.log(chart);
+      statusMessage(res, true, "success updated item", chart);
     } catch (error) {
       statusMessage(res, false, error.message);
     }
-  }
+  },
 };
