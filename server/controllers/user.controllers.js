@@ -22,27 +22,27 @@ module.exports = {
       const user = await User.findOne({
         email
       })
-      console.log(user, "user>>>>")
+
       if(user) {
         bcrypt.compare(user.password, password, (err, isMatch) => {
           if(!err) {
 
-            const token = jwt.sign({
+            const generateToken = jwt.sign({
               id: user._id,
               username: user.username,
               email: user.email
             }, secretKey)
 
-            const payload = {token}
-            return res.status(200).json({message: 'sucess', token: token, id: user._id})
-
+            const payload = {generateToken, user}
+            //return res.status(200).json({message: 'sucess',payload, id: user._id})
+            statusMessage(res, true, 'success sign in', payload)
 
           } else {
             statusMessage(res, false, 'wrong email / password', null);
           }
         })
       } else {
-        console.log(">>>>")
+
         statusMessage(res, false, 'wrong email / password', null);
       }
     } catch (error) {

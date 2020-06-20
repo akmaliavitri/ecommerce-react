@@ -5,13 +5,16 @@ module.exports = {
   addProduct: async (req, res) => {
     try {
       let data = req.body
+      let { id } = req.userData
+      
       const newProduct = {
-        // user : req.userData.id,
+        user : req.userData.id,
         name : data.name,
         price: data.price,
         stock: data.stock,
         image_url: data.image_url
       }
+      console.log("here newPorudt:",newProduct)
       
       const product = await Product.create(newProduct)
 
@@ -35,9 +38,9 @@ module.exports = {
   deleteProduct: async (req, res) => {
     try {
       const { id } = req.params
-
-      const product = await Product.findByIdAndRemove({ _id : id }).populate('user')
-
+      console.log("params id", req.params.id)
+      const product = await Product.findByIdAndRemove({ _id : id })
+      console.log("ini product", product)
       statusMessage(res, true, 'success to delete product', product)
     } catch (error) {
       statusMessage(res, false, error.message)
