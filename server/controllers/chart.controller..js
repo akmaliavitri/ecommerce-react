@@ -58,15 +58,16 @@ module.exports = {
   updateItem : async (req, res) => {
     try {
       const { id } = req.params
-      // const updateChart = {
-      //   $push: {
-      //     items: {
-      //       quantity: req.body.quantity,
-      //     },
-      //   },
-      // };
-      const chart = await Chart.update ({ _id : id }, req.body, {$pull : req.userData.id})
-
+      const updateChart = {
+        $push: {
+          items: {
+            quantity: req.body.quantity,
+          },
+        },
+      };
+      
+      const chart = await Chart.findOneAndUpdate({ _id : id }, req.body, {$pull : req.userData.id})
+      console.log(chart)
       statusMessage(res, true, 'success updated item', chart)
     } catch (error) {
       statusMessage(res, false, error.message);
