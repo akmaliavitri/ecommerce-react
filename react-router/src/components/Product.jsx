@@ -67,14 +67,13 @@ const Product = () => {
                 |
                 <Link
                   to={{
-                    pathname: "/detailProduct",
+                    pathname:`chart/add/${product._id}`,
                     state: {
                       product: product,
                     },
                   }}
                 >
-                  Detail
-                </Link>
+                  <i className="fa fa-cart-plus fa" id ="nav-add-chart" aria-hidden="true">Add</i>                </Link>
               </div>
             </div>
           </div>
