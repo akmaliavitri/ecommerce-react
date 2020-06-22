@@ -5,23 +5,19 @@ import axios from "axios";
 
 const Product = () => {
   const [productList, setProductList] = useState([]);
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     getProduct();
   }, []);
 
-  const getProduct = () => {
-    axios
-      .get("http://localhost:3000/product")
-      .then((result) => {
-        const dataProduct = result.data.data;
-        console.log(dataProduct);
-        setProductList([...dataProduct]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const getProduct = async () => {
+    const {
+      data: { data },
+    } = await axios.get("http://localhost:3000/product", {
+      headers: { access_token: localStorage.getItem("access_token") },
+    });
+
+    setProductList(data);
   };
 
   const destroyProduct = (_id) => {
@@ -36,7 +32,7 @@ const Product = () => {
       });
   };
 
-  if (!token) {
+  if (!localStorage.getItem("access_token")) {
     return <Redirect to="/signin" />;
   }
 
