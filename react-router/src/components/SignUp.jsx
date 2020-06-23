@@ -31,7 +31,7 @@ const SignUp = () => {
       email : email,
       password: password
     }
-    axios.post(`http://localhost:3000/signup`, newMember)
+    axios.post(`http://localhost:4000/signup`, newMember)
       .then(result => {
         console.log(result)
         setUsername('')

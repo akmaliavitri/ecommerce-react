@@ -21,9 +21,11 @@ const Product = () => {
   };
 
   const destroyProduct = (_id) => {
-    console.log(_id);
+    // console.log(_id);
     axios
-      .delete(`http://localhost:4000/product/delete/${_id}`)
+      .delete(`http://localhost:4000/product/delete/${_id}`, {
+        headers: { access_token: localStorage.getItem("access_token") },
+      })
       .then((result) => {
         getProduct();
       })
@@ -67,14 +69,20 @@ const Product = () => {
                 |
                 <Link
                   to={{
-                    pathname:`/detailProduct`,
+                    pathname: `/detailProduct`,
                     state: {
                       product: product,
                     },
                   }}
                 >
-                  <i className="fa fa-cart-plus fa" id ="nav-add-chart" aria-hidden="true">Add</i>                
-              </Link>
+                  <i
+                    className="fa fa-cart-plus fa"
+                    id="nav-add-chart"
+                    aria-hidden="true"
+                  >
+                    Add
+                  </i>
+                </Link>
               </div>
             </div>
           </div>

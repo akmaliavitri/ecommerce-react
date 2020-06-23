@@ -3,31 +3,32 @@ import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
 
 const Chart = () => {
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(1);
   const { state } = useLocation();
   const product = state.product;
 
   const addNewItem = (id) => {
     const postProduct = {
-      quantity : quantity
-    }
+      quantity: quantity,
+    };
 
     // const postProduct = product
-    console.log('ini post product', postProduct)
+    console.log("ini post product", postProduct);
 
-    axios.post(`http://localhost:4000/chart/add/${id}`, postProduct, {
-      headers: { access_token: localStorage.getItem("access_token") },
-    })
+    axios
+      .post(`http://localhost:4000/chart/add/${id}`, postProduct, {
+        headers: { access_token: localStorage.getItem("access_token") },
+      })
       .then((result) => {
-        setQuantity(1)
-        console.log("ini result", result)
-        console.log("ini data nya", result.data)
-        console.log('terikirim')
+        setQuantity(1);
+        console.log("ini result", result);
+        console.log("ini data nya", result.data);
+        console.log("terikirim");
       })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="container-page-product">
@@ -46,13 +47,20 @@ const Chart = () => {
               <i>Back</i>
             </Link>{" "}
             |
-            <Link to={{
-              pathname: '/myChart',
-              state: {
-                product: product
-              }
-            }}>
-              <button className="btn btn-primary" onClick={() => addNewItem(product._id)}>Submit</button>
+            <Link
+              to={{
+                pathname: "/myChart",
+                state: {
+                  product: product,
+                },
+              }}
+            >
+              <button
+                className="btn btn-primary"
+                onClick={() => addNewItem(product._id)}
+              >
+                Submit
+              </button>
             </Link>
           </div>
         </div>

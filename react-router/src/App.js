@@ -11,7 +11,6 @@ import Navbar from './components/Navbar'
 import Footer from './components/footer'
 import DetailProduct from './components/DetailProduct'
 import MyChart from './components/MyChart'
-// import AddToChart from './components/AddToChart'
 
 function App() {
   return (
@@ -25,7 +24,6 @@ function App() {
         <Route exact path='/product/update' component={UpdateProduct} />
         <Route exact path='/detailProduct' component={DetailProduct} />
         <Route exact path='/myChart' component={MyChart} />
-        {/* <Route exact path='/chart/add/:id' component={AddToChart} /> */}
       <Footer />
       </BrowserRouter>
     </div>
