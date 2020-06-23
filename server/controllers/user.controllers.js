@@ -22,7 +22,6 @@ module.exports = {
   signIn: async (req, res) => {
     try {
       let { email, password } = req.body;
-      // console.log(req.body)
       const user = await User.findOne({
         email,
       });
@@ -44,12 +43,12 @@ module.exports = {
             id: user._id,
             token,
           };
-
           statusMessage(res, true, 'success sign in', payload)
         } else {
           statusMessage(res, false, "wrong email / password", null);
         }
       } else {
+        console.log('disini')
         statusMessage(res, false, "wrong email / password", null);
       }
     } catch (error) {

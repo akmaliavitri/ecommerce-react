@@ -9,7 +9,9 @@ import AddProduct from './components/AddProduct'
 import UpdateProduct from './components/UpdateProduct'
 import Navbar from './components/Navbar'
 import Footer from './components/footer'
-import AddToChart from './components/AddToChart'
+import DetailProduct from './components/DetailProduct'
+import MyChart from './components/MyChart'
+// import AddToChart from './components/AddToChart'
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
         <Route exact path='/product' component={Product} />
         <Route exact path='/product/add' component={AddProduct} />
         <Route exact path='/product/update' component={UpdateProduct} />
-        <Route exact path='/chart/add/:id' component={AddToChart} />
+        <Route exact path='/detailProduct' component={DetailProduct} />
+        <Route exact path='/myChart' component={MyChart} />
+        {/* <Route exact path='/chart/add/:id' component={AddToChart} /> */}
       <Footer />
       </BrowserRouter>
     </div>

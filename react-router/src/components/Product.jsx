@@ -13,7 +13,7 @@ const Product = () => {
   const getProduct = async () => {
     const {
       data: { data },
-    } = await axios.get("http://localhost:3000/product", {
+    } = await axios.get("http://localhost:4000/product", {
       headers: { access_token: localStorage.getItem("access_token") },
     });
 
@@ -23,7 +23,7 @@ const Product = () => {
   const destroyProduct = (_id) => {
     console.log(_id);
     axios
-      .delete(`http://localhost:3000/product/delete/${_id}`)
+      .delete(`http://localhost:4000/product/delete/${_id}`)
       .then((result) => {
         getProduct();
       })
@@ -67,13 +67,14 @@ const Product = () => {
                 |
                 <Link
                   to={{
-                    pathname:`chart/add/${product._id}`,
+                    pathname:`/detailProduct`,
                     state: {
                       product: product,
                     },
                   }}
                 >
-                  <i className="fa fa-cart-plus fa" id ="nav-add-chart" aria-hidden="true">Add</i>                </Link>
+                  <i className="fa fa-cart-plus fa" id ="nav-add-chart" aria-hidden="true">Add</i>                
+              </Link>
               </div>
             </div>
           </div>

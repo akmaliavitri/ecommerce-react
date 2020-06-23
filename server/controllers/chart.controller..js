@@ -38,19 +38,19 @@ module.exports = {
         { user: req.userData.id },
         { items: payload }
       );
-
+        console.log("ini chart", chart)
       statusMessage(res, true, "success add item to chart", chart);
     } catch (error) {
       statusMessage(res, false, error.message);
     }
   },
 
-  incrementItemQty: async () => {},
-  decrementItemQty: async () => {},
+  // incrementItemQty: async () => {},
+  // decrementItemQty: async () => {},
 
   getChart: async (req, res) => {
     try {
-      const chart = await Chart.find({user : req.userData.id })
+      const chart = await Chart.findOne({user : req.userData.id })
         .populate({
           path: "items",
           populate: {
@@ -87,24 +87,24 @@ module.exports = {
     }
   },
 
-  updateItem: async (req, res) => {
-    try {
-      const { id } = req.params;
-      const updateChart = {
-        $push: {
-          items: {
-            quantity: req.body.quantity,
-          },
-        },
-      };
+  // updateItem: async (req, res) => {
+  //   try {
+  //     const { id } = req.params;
+  //     const updateChart = {
+  //       $push: {
+  //         items: {
+  //           quantity: req.body.quantity,
+  //         },
+  //       },
+  //     };
 
-      const chart = await Chart.findOneAndUpdate({ _id: id }, req.body, {
-        $pull: req.userData.id,
-      });
-      console.log(chart);
-      statusMessage(res, true, "success updated item", chart);
-    } catch (error) {
-      statusMessage(res, false, error.message);
-    }
-  },
+  //     const chart = await Chart.findOneAndUpdate({ _id: id }, req.body, {
+  //       $pull: req.userData.id,
+  //     });
+  //     console.log(chart);
+  //     statusMessage(res, true, "success updated item", chart);
+  //   } catch (error) {
+  //     statusMessage(res, false, error.message);
+  //   }
+  // },
 };
