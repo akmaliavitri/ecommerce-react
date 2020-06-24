@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
 
-const Chart = () => {
+const Coba = () => {
   const [quantity, setQuantity] = useState(1);
   const { state } = useLocation();
   const product = state.product;
@@ -30,18 +30,20 @@ const Chart = () => {
       });
   };
 
-  return (
-    <div className="container-page-product">
-      <div>
-        <div className="card" id="detail-product">
+  return(
+    <div>
+      <h2>halo</h2>
+      <div className="container-coba">
+        <div className="row">
+          <div className="col-md-4">
           <img src={product.image_url} className="card-img-top" alt="..." />
-          <div className="card-body">
+          </div>
+          <div className="col-md-8">
             <h5 className="card-title">{product.name}</h5>
             <p className="card-text">{product.price}</p>
             <p className="card-text">{product.stock}</p>
             <p className="card-text">{product.quantity}</p>
           </div>
-
           <div>
             <Link to="/product">
               <i>Back</i>
@@ -49,7 +51,7 @@ const Chart = () => {
             |
             <Link
               to={{
-                pathname: "/coba",
+                pathname: "/myChart",
                 state: {
                   product: product,
                 },
@@ -66,7 +68,7 @@ const Chart = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Chart;
+export default Coba

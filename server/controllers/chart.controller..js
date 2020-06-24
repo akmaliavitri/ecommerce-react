@@ -38,7 +38,7 @@ module.exports = {
         { user: req.userData.id },
         { items: payload }
       );
-        console.log("ini chart", chart)
+      console.log("ini chart", chart);
       statusMessage(res, true, "success add item to chart", chart);
     } catch (error) {
       statusMessage(res, false, error.message);
@@ -50,7 +50,7 @@ module.exports = {
 
   getChart: async (req, res) => {
     try {
-      const chart = await Chart.findOne({user : req.userData.id })
+      const chart = await Chart.findOne({ user: req.userData.id })
         .populate({
           path: "items",
           populate: {

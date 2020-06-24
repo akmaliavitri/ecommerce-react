@@ -98,3 +98,15 @@
 #detail-product{
   width: 50%;
 }
+
+.col-md-6{
+  background-color: #61dafb;
+}
+
+.col-md-8{
+  background-color: blue;
+}
+
+.col-md-4{
+  background-color: chartreuse;
+}

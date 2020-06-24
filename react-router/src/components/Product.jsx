@@ -49,10 +49,10 @@ const Product = () => {
             <img src={product.image_url} className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">{product.name}</h5>
-              <p className="card-text">{product.price}</p>
-              <p className="card-text">{product.stock}</p>
+              <p className="card-text">Rp. {product.price}</p>
+              <p className="card-text">Stock :{product.stock}</p>
               <div>
-                <Link to="/product/update">
+                <Link to = {"/product/update/" + product._id}>
                   <i className="fa fa-pencil-square-o" aria-hidden="true">
                     Update
                   </i>
@@ -69,7 +69,7 @@ const Product = () => {
                 |
                 <Link
                   to={{
-                    pathname: `/detailProduct`,
+                    pathname: `/coba`,
                     state: {
                       product: product,
                     },
