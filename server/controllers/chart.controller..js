@@ -87,6 +87,19 @@ module.exports = {
     }
   },
 
+  updateQuantity: async (req, res) => {
+    try {
+      const dataChart = await Chart.findByIdAndUpdate(
+        { _id : req.params.id, 'items.product' : req.body.product},
+        { 'items.0.quantity': req.body.quantity }
+      )
+
+      statusMessage(res, true, "success update quantity item from chart", dataChart);
+    } catch (error) {
+      console.log(error)
+      statusMessage(res, false, error.message);
+    }
+  }
   // updateItem: async (req, res) => {
   //   try {
   //     const { id } = req.params;

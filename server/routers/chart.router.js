@@ -6,6 +6,6 @@ router.use(authentication)
 router.post('/add/:id', chartController.addToChart)
 router.get('/', chartController.getChart)
 router.delete('/delete/:id', chartController.deleteItem)
-// router.put('/update/:id', chartController.updateItem)
+router.put('/update/:id', chartController.updateQuantity)
 
 module.exports = router

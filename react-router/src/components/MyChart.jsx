@@ -19,6 +19,19 @@ const MyChart = () => {
     setChartItems(data.items);
   };
 
+  const inQuantity = async () => {
+    axios
+      .get(`http://localhost:4000/product`, {
+        headers: { access_token: localStorage.getItem("access_token") },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <div>
       <h2>MyChart</h2>
@@ -61,7 +74,7 @@ const MyChart = () => {
                       id="name-product"
                       placeholder="1"
                     />
-                    <button type="button" className="btn btn-secondary">+</button>
+                    <button type="button" className="btn btn-secondary" onClick = {inQuantity}>+</button>
                   </div>
                 </div>
                 
