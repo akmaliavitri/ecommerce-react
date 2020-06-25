@@ -5,10 +5,10 @@ const MyChart = () => {
   const [charItems, setChartItems] = useState([]);
 
   useEffect(() => {
-    getItem();
+    getItemData();
   }, []);
 
-  const getItem = async () => {
+  const getItemData = async () => {
     const {
       data: { data },
     } = await axios.get("http://localhost:4000/chart", {
@@ -19,18 +19,20 @@ const MyChart = () => {
     setChartItems(data.items);
   };
 
-  const inQuantity = async () => {
+  const removeItem = (_id) => {
+    console.log("ini idnya", _id)
     axios
-      .get(`http://localhost:4000/product`, {
+      .delete(`http://localhost:4000/chart/delete/${_id}`, {
         headers: { access_token: localStorage.getItem("access_token") },
       })
-      .then((response) => {
-        console.log(response.data);
+      .then((result) => {
+        console.log("ini result", result)
+        getItemData();
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   return (
     <div>
@@ -61,24 +63,38 @@ const MyChart = () => {
               </td>
               <td>Rp. {item.product.price}</td>
               <td>{item.quantity}</td>
-              <td>
-                Rp. {item.quantity * item.product.price} 
-              </td>
+              <td>Rp. {item.quantity * item.product.price}</td>
               <td>
                 <div>
-                  <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-secondary">-</button>
+                  <div
+                    className="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <button type="button" className="btn btn-secondary">
+                      -
+                    </button>
                     <input
                       type="text"
                       className="form-control"
                       id="name-product"
                       placeholder="1"
                     />
-                    <button type="button" className="btn btn-secondary" onClick = {inQuantity}>+</button>
+                    <button type="button" className="btn btn-secondary">
+                      +
+                    </button>
                   </div>
                 </div>
-                
-                <i className="fa fa-shopping-cart" aria-hidden="true">Checkout</i>
+                <i className="fa fa-shopping-cart" aria-hidden="true">
+                  Checkout
+                </i>
+                <i
+                  className="fa fa-trash"
+                  aria-hidden="true"
+                  onClick={() => removeItem(item.product._id)}
+                >
+                  Delete
+                </i>
               </td>
             </tr>
           ))}

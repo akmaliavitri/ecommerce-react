@@ -69,7 +69,7 @@ const Product = () => {
                 |
                 <Link
                   to={{
-                    pathname: `/myChart`,
+                    pathname: `/detailProduct`,
                     state: {
                       product: product,
                     },

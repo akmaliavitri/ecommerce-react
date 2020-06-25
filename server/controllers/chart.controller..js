@@ -100,6 +100,7 @@ module.exports = {
       statusMessage(res, false, error.message);
     }
   }
+  
   // updateItem: async (req, res) => {
   //   try {
   //     const { id } = req.params;
