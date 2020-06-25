@@ -8,6 +8,7 @@ export class UpdateProduct extends Component {
     image_url: "",
     price: "",
     stock: "",
+    isEdit: false
   };
 
   componentDidMount = () => {

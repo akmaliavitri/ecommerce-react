@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom'
 
 const MyChart = () => {
   const [charItems, setChartItems] = useState([]);
+  const [chartId, setChartId] = useState([])
 
   useEffect(() => {
     getItemData();
@@ -15,7 +17,9 @@ const MyChart = () => {
       headers: { access_token: localStorage.getItem("access_token") },
     });
 
-    console.log(data.items, ">>>>data dari myChart");
+    console.log(data._id, ">>id chart user");
+    console.log(data.items, "id product")
+    setChartId(data._id)
     setChartItems(data.items);
   };
 
@@ -95,6 +99,11 @@ const MyChart = () => {
                 >
                   Delete
                 </i>
+                <div>
+                  <Link to = {"/chart/" + chartId + "/update/" + item.product._id }>
+                    Update
+                  </Link>
+                </div>
               </td>
             </tr>
           ))}
