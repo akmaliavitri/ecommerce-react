@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from 'react-router-dom'
+import Axios from "axios";
+import { Link } from "react-router-dom";
 
 const MyChart = () => {
   const [charItems, setChartItems] = useState([]);
-  const [chartId, setChartId] = useState([])
+  const [chartId, setChartId] = useState([]);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     getItemData();
@@ -13,29 +14,55 @@ const MyChart = () => {
   const getItemData = async () => {
     const {
       data: { data },
-    } = await axios.get("http://localhost:4000/chart", {
+    } = await Axios.get("http://localhost:4000/chart", {
       headers: { access_token: localStorage.getItem("access_token") },
     });
 
     console.log(data._id, ">>id chart user");
-    console.log(data.items, "id product")
-    setChartId(data._id)
+    console.log(data.items, "id product");
+    setChartId(data._id);
     setChartItems(data.items);
   };
 
   const removeItem = (_id) => {
-    console.log("ini idnya", _id)
-    axios
-      .delete(`http://localhost:4000/chart/delete/${_id}`, {
-        headers: { access_token: localStorage.getItem("access_token") },
-      })
+    console.log("ini idnya", _id);
+    Axios.delete(`http://localhost:4000/chart/delete/${_id}`, {
+      headers: { access_token: localStorage.getItem("access_token") },
+    })
       .then((result) => {
-        console.log("ini result", result)
+        console.log("ini result", result);
         getItemData();
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const inCreament = async (item) => {
+    await Axios.put(
+      `http://localhost:4000/chart/increament/${chartId}/update/${item.product._id}`,
+      {
+        quantity,
+      },
+      {
+        headers: { access_token: localStorage.getItem("access_token") },
+      }
+    );
+    getItemData();
+  };
+
+  const decCrement = async (item) => {
+    console.log(item);
+    await Axios.put(
+      `http://localhost:4000/chart/decrement/${chartId}/update/${item.product._id}`,
+      {
+        quantity,
+      },
+      {
+        headers: { access_token: localStorage.getItem("access_token") },
+      }
+    );
+    getItemData();
   };
 
   return (
@@ -75,7 +102,11 @@ const MyChart = () => {
                     role="group"
                     aria-label="Basic example"
                   >
-                    <button type="button" className="btn btn-secondary">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() => decCrement(item)}
+                    >
                       -
                     </button>
                     <input
@@ -84,7 +115,11 @@ const MyChart = () => {
                       id="name-product"
                       placeholder="1"
                     />
-                    <button type="button" className="btn btn-secondary">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() => inCreament(item)}
+                    >
                       +
                     </button>
                   </div>
@@ -100,7 +135,9 @@ const MyChart = () => {
                   Delete
                 </i>
                 <div>
-                  <Link to = {"/chart/" + chartId + "/update/" + item.product._id }>
+                  <Link
+                    to={"/chart/" + chartId + "/update/" + item.product._id}
+                  >
                     Update
                   </Link>
                 </div>

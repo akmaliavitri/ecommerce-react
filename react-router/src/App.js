@@ -11,7 +11,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/footer";
 import DetailProduct from "./components/DetailProduct";
 import MyChart from "./components/MyChart";
-import UpdateQuantity from './components/UpdateQuantity'
+import UpdateQuantity from "./components/UpdateQuantity";
 import Coba from "./components/Coba";
 
 function App() {
@@ -26,7 +26,11 @@ function App() {
         <Route exact path="/product/update/:id" component={UpdateProduct} />
         <Route exact path="/detailProduct" component={DetailProduct} />
         <Route exact path="/myChart" component={MyChart} />
-        <Route exact path="/chart/:id/update/:product" component={UpdateQuantity} />
+        <Route
+          exact
+          path="/chart/:id/update/:productId"
+          component={UpdateQuantity}
+        />
         <Route exact path="/coba" component={Coba} />
         <Footer />
       </BrowserRouter>
