@@ -1,99 +1,56 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { useHistory } from 'react-router-dom'
 import Axios from "axios";
 
-export class UpdateQuantity extends Component {
-  state = {
-    id: "",
-    items: [
-      {
-        product : "",
-        quantity: "",
-      },
-    ],
-    isEdit: false,
-  };
+const UpdateQuantity = (props) => {
+  const [ quantity, setQuantity ] = useState('')
 
-  componentDidMount = () => {
-    const { id } = this.props.match.params;
-    console.log(id, "id update chart");
-    
-    Axios.get(`http://localhost:4000/chart/${id}`, {
-      headers: { access_token: localStorage.getItem("access_token") },
-    })
-      .then((response) => {
-        console.log(response.data, "response data");
-        this.setState({ ...response.data, isEdit: true });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  let history = useHistory()
 
-  handlerChange = (e) => {
-    const key = e.target.name;
-    this.setState({ [key]: e.target.value });
-  };
+  const handlerChange = (e) => {
+    setQuantity(e.target.value)
+  }
 
-  handlerSubmit = async (e) => {
-    e.preventDefault();
+  const handlerSubmit = async (e) => {
+    e.preventDefault()
 
-    const { id } = this.props.match.params;
-    const { product } = this.props.match.params
-
-    const dataUpdate = {
-      items: [
-        {
-          quantity: this.state.items.quantity,
-        },
-      ],
-    };
+    const { id, productId } = props.match.params
 
     const result = await Axios.put(
-      `http://localhost:4000/chart/${id}/update/${product}`,
-      dataUpdate,
+      `http://localhost:4000/chart/${id}/update/${productId}`,
+      {
+        quantity,
+      },
       {
         headers: { access_token: localStorage.getItem("access_token") },
       }
     );
     console.log(result.data, "ini data update");
-    this.setState({ ...result.data, isEdit: false });
-  };
+    history.push("/myChart");
+  }
 
-  render() {
     return (
       <div>
-        <h1>Update Quantity Page</h1>
+      <h1>Update Quantity Page</h1>
 
-        <form onSubmit={this.handlerSubmit}>
-          <table>
-            <tbody>
-              <tr>
-                <td>quantity </td>
-                <td>
-                  <input
-                    type="Number"
-                    name="quantity"
-                    onChange={this.handlerChange}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>
-                  <input
-                    type="submit"
-                    value="Edit"
-                    className="btn btn-primary"
-                    onChange={this.handlerChange}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
+      <form>
+        <table>
+          <tbody>
+            <tr>
+              <td>quantity </td>
+              <td>
+                <input type="Number" name="quantity" onChange={handlerChange} />
+              </td>
+              <td>
+                <button onClick={handlerSubmit}>Submit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
     );
-  }
+  
 }
 
 export default UpdateQuantity;

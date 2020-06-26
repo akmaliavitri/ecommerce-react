@@ -87,34 +87,117 @@ module.exports = {
     }
   },
 
+  checkout: async (req, res) => {
+    console.log(req.params.id,"id")
+    console.log(req.body.quantity,"quantity")
+      // statusMessage(res, true, "success checkout item");
+
+    try {
+      
+      const dataProduct = await Product.findOneAndUpdate({ _id : req.params.id}, { $inc: {"stock" : -req.body.quantity}})
+      
+      const updateChart = {
+        $pull: {
+          items: {
+            product: req.params.id,
+          },
+        }, 
+      };
+
+      const dataChart = await Chart.updateOne(
+        { user: req.userData.id },
+        updateChart
+      );
+
+      statusMessage(res, true, "success checkout item", dataChart);
+    } catch (error) {
+      statusMessage(res, false, error.message);
+    }
+  },
+
   updateQuantity: async (req, res) => {
     try {
-      const { id, product } = req.params
-      const { quantity } = req.body
+      const { id, product } = req.params;
+      const { quantity } = req.body;
 
-      const dataChart = await Chart.findByIdAndUpdate(
-        { _id : id, 'items.product' : product},
-        { 'items.0.quantity': req.body.quantity }
-      )
+      console.log(quantity);
 
-      statusMessage(res, true, "success update quantity item from chart", dataChart);
+      const dataChart = await Chart.update(
+        { _id: id, "items.product": product },
+        { "items.$.quantity": quantity }
+      );
+
+      statusMessage(
+        res,
+        true,
+        "success update quantity item from chart",
+        dataChart
+      );
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      statusMessage(res, false, error.message);
+    }
+  },
+
+  updateQuantityIn: async (req, res) => {
+    try {
+      const { id, product } = req.params;
+      const { quantity } = req.body;
+
+      console.log(quantity);
+
+      const dataChart = await Chart.updateOne(
+        { _id: id, "items.product": product },
+        { $inc: { "items.$.quantity": 1 } }
+      );
+
+      statusMessage(
+        res,
+        true,
+        "success update quantity item from chart",
+        dataChart
+      );
+    } catch (error) {
+      console.log(error);
+      statusMessage(res, false, error.message);
+    }
+  },
+
+  updateQuantityDec: async (req, res) => {
+    try {
+      const { id, product } = req.params;
+      const { quantity } = req.body;
+
+      console.log(quantity);
+
+      const dataChart = await Chart.updateOne(
+        { _id: id, "items.product": product },
+        { $inc: { "items.$.quantity": -1 } }
+      );
+
+      statusMessage(
+        res,
+        true,
+        "success update quantity item from chart",
+        dataChart
+      );
+    } catch (error) {
+      console.log(error);
       statusMessage(res, false, error.message);
     }
   },
 
   getChartItem: async (req, res) => {
     try {
-      const { id } = req.params
-      const dataChart = await Chart.findOne( { _id: id })
+      const { id } = req.params;
+      const dataChart = await Chart.findOne({ _id: id });
 
       statusMessage(res, true, "success find item from chart", dataChart);
     } catch (error) {
       statusMessage(res, false, error.message);
     }
-  }
-  
+  },
+
   // updateItem: async (req, res) => {
   //   try {
   //     const { id } = req.params;
