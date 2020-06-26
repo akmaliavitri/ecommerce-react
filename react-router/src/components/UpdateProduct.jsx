@@ -1,51 +1,41 @@
-import React, { Component } from 'react'
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-export class UpdateProduct extends Component {
-  state = {
-    id: "",
-    name: "",
-    image_url: "",
-    price: "",
-    stock: "",
-    isEdit: false
+const UpdateProduct = (props) => {
+  const [name, setName] = useState("");
+  const [stock, setStock] = useState("");
+  const [price, setPrice] = useState("");
+  const [image_url, setImage_url] = useState("");
+
+  let history = useHistory();
+
+  const onChangeName = (e) => {
+    setName(e.target.value);
   };
 
-  componentDidMount = () => {
-    const { id } = this.props.match.params;
-    console.log(id, "ini id nya")
-    axios
-      .get(`http://localhost:4000/product/${id}`, {
-        headers: { access_token: localStorage.getItem("access_token") },
-      })
-      .then((response) => {
-        console.log(response.data);
-        this.setState({ ...response.data, isEdit: true });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const onChangeStock = (e) => {
+    setStock(e.target.value);
   };
 
-  handlerChange = (e) => {
-    const key = e.target.name;
-    this.setState({ [key]: e.target.value });
+  const onChangePrice = (e) => {
+    setPrice(e.target.value);
   };
 
-  handlerSubmit = async (e) => {
+  const onChangeImage = (e) => {
+    setImage_url(e.target.value);
+  };
+
+  const updatePost = async (e) => {
     e.preventDefault();
 
-    const { id } = this.props.match.params;
-    console.log("ini id nya", id);
-
+    const { id } = props.match.params;
     const dataUpdate = {
-      name: this.state.name,
-      image_url: this.state.image_url,
-      stock: this.state.stock,
-      price: this.state.price,
+      name,
+      price,
+      stock,
+      image_url,
     };
-
-    console.log("data yang diinput", dataUpdate);
 
     const result = await axios.put(
       `http://localhost:4000/product/update/${id}`,
@@ -54,76 +44,51 @@ export class UpdateProduct extends Component {
         headers: { access_token: localStorage.getItem("access_token") },
       }
     );
-    this.setState({ ...result.data, isEdit: false });
+    console.log(result.data, "ini data update");
+    history.push("/product");
   };
 
-  render() {
-    return (
-    
-      <div className="container">
-        <h2>Update Food</h2>
+  return (
+    <div className="container">
+      <h2>Update Food</h2>
 
-        <form onSubmit={this.handlerSubmit}>
-          <table>
-            <tbody>
-              <tr>
-                <td>Name </td>
-                <td>
-                  <input
-                    type="text"
-                    name="name"
-                    onChange={this.handlerChange}
-                    />
-                </td>
-              </tr>
-              <tr>
-                <td>image-URL </td>
-                <td>
-                  <input
-                    type="text"
-                    name="image_url"
-                    onChange={this.handlerChange}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>Price </td>
-                <td>
-                  <input
-                    type="number"
-                    name="price"
-                    onChange={this.handlerChange}
-                    />
-                </td>
-              </tr>
-              <tr>
-                <td>Stock </td>
-                <td>
-                  <input
-                    type="number"
-                    name="stock"
-                    onChange={this.handlerChange}
-                    />
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>
-                  <input
-                    type="submit"
-                    value="Edit"
-                    className="btn btn-primary"
-                    onChange={this.handlerChange}
-                    />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
-     
-    );
-  }
-}
+      <form>
+        <table>
+          <tbody>
+            <tr>
+              <td>Name </td>
+              <td>
+                <input type="text" name="name" onChange={onChangeName} />
+              </td>
+            </tr>
+            <tr>
+              <td>image-URL </td>
+              <td>
+                <input type="text" name="image_url" onChange={onChangeImage} />
+              </td>
+            </tr>
+            <tr>
+              <td>Price </td>
+              <td>
+                <input type="number" name="price" onChange={onChangePrice} />
+              </td>
+            </tr>
+            <tr>
+              <td>Stock </td>
+              <td>
+                <input type="number" name="stock" onChange={onChangeStock} />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button onClick={updatePost}>Submit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  );
+};
 
-export default UpdateProduct
+export default UpdateProduct;
