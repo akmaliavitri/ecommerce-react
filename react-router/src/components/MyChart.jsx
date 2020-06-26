@@ -42,20 +42,6 @@ const MyChart = () => {
     console.log("id yang di checkout", _id);
     console.log("quantity nya", quantity)
 
-    //  Axios.post(
-    //   `http://localhost:4000/chart/checkout/${_id}`,
-    //   {
-    //     quantity,
-    //   },
-    //   {
-    //     headers: { access_token: localStorage.getItem("access_token") },
-    //   }
-    // )
-    // .then((result) => {
-    //   getItemData()
-    // })
-
-
     Axios.delete(
       `http://localhost:4000/chart/checkout/${_id}`,
       {
@@ -105,7 +91,8 @@ const MyChart = () => {
       <table className="table">
         <thead className="thead-light">
           <tr>
-            <th scope="col">no</th>
+            <th scope="col">Check</th>
+            <th scope="col">No</th>
             <th scope="col">Name</th>
             <th scope="col">Image-Url</th>
             <th scope="col">Price</th>
@@ -118,6 +105,9 @@ const MyChart = () => {
         <tbody>
           {charItems.map((item, index) => (
             <tr key={index}>
+              <th>
+                <input type="checkbox" id="checkChcekout"></input>
+              </th>
               <th>{index + 1}</th>
               <td>{item.product.name}</td>
               <td>
@@ -187,6 +177,9 @@ const MyChart = () => {
             </tr>
           ))}
         </tbody>
+        <div>
+          <i>Checkout All</i>
+        </div>
       </table>
     </div>
   );
