@@ -1,6 +1,6 @@
-const router = require('express').Router()
-const chartController = require('../controllers/chart.controller.')
-const { authentication } = require('../middlewares/authentication')
+const router = require("express").Router();
+const chartController = require("../controllers/chart.controller.");
+const { authentication } = require("../middlewares/authentication");
 
 router.use(authentication)
 router.post('/add/:id', chartController.addToChart)
@@ -13,4 +13,4 @@ router.put("/decrement/:id/update/:product", chartController.updateQuantityDec);
 router.put("/:id/update/:product", chartController.updateQuantity);
 router.get('/:id', chartController.getChartItem)
 
-module.exports = router
+module.exports = router;

@@ -11,7 +11,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/footer";
 import DetailProduct from "./components/DetailProduct";
 import MyChart from "./components/MyChart";
-import UpdateQuantity from './components/UpdateQuantity'
+import UpdateQuantity from "./components/UpdateQuantity";
 import Coba from "./components/Coba";
 
 function App() {
