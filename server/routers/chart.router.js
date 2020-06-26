@@ -6,6 +6,7 @@ router.use(authentication)
 router.post('/add/:id', chartController.addToChart)
 // router.post('/checkout/:id', chartController.checkout)
 router.delete('/checkout/:id', chartController.checkout)
+router.post('/checkoutAll/', chartController.chekoutCheck)
 router.get('/', chartController.getChart)
 router.delete('/delete/:id', chartController.deleteItem)
 router.put("/increament/:id/update/:product", chartController.updateQuantityIn);

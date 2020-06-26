@@ -47,6 +47,14 @@
   margin-top: 110px
 }
 
+.rowRegis {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-gap: 10px;
+  background-color: #fff;
+  color: #444;
+}
+
 /* product */
 .card{
   width: 18rem;
@@ -88,7 +96,7 @@
 }
 
 #nav-add-chart{
-  background-color: blue;
+  /* background-color: blue; */
   margin: 20px;
   color: white;
   padding: 5px 5px 5px 5px;
@@ -103,9 +111,9 @@
   background-color: #61dafb;
 }
 
-.col-md-8{
+/* .col-md-8{
   background-color: blue;
-}
+} */
 
 .col-md-4{
   background-color: chartreuse;

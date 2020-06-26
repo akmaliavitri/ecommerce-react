@@ -9,6 +9,10 @@ const AddProduct = () => {
   const [image_url, setImage_url] = useState("");
   const [redirect, setRedirect] = useState(false);
 
+
+  if(!localStorage.getItem("access_token")) {
+    return <Redirect to="/signin" />
+  }
   const onChangeName = (e) => {
     const value = e.target.value;
     setName(value);

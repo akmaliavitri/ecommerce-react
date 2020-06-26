@@ -88,20 +88,22 @@ module.exports = {
   },
 
   checkout: async (req, res) => {
-    console.log(req.params.id,"id")
-    console.log(req.body.quantity,"quantity")
-      // statusMessage(res, true, "success checkout item");
+    console.log(req.params.id, "id");
+    console.log(req.body.quantity, "quantity");
+    // statusMessage(res, true, "success checkout item");
 
     try {
-      
-      const dataProduct = await Product.findOneAndUpdate({ _id : req.params.id}, { $inc: {"stock" : -req.body.quantity}})
-      
+      await Product.findOneAndUpdate(
+        { _id: req.params.id },
+        { $inc: { stock: -req.body.quantity } }
+      );
+
       const updateChart = {
         $pull: {
           items: {
             product: req.params.id,
           },
-        }, 
+        },
       };
 
       const dataChart = await Chart.updateOne(
@@ -110,6 +112,33 @@ module.exports = {
       );
 
       statusMessage(res, true, "success checkout item", dataChart);
+    } catch (error) {
+      statusMessage(res, false, error.message);
+    }
+  },
+
+  chekoutCheck: async (req, res) => {
+    // console.log("ids", req.body.ids);
+    // console.log("quantities", req.body.quantities);
+    try {
+      await Product.updateMany(
+        { _id: { $in: req.body.ids } },
+        { $inc: { stock: -2 } }
+      );
+      const check = {
+        $pull: {
+          items: {
+            product: { $in: [req.body.ids] },
+          },
+        },
+      };
+
+      const dataCheck = await Chart.updateMany(
+        { user: req.userData.id },
+        check
+      );
+      console.log("datacheck", dataCheck);
+      statusMessage(res, true, "success checkout many item", dataChart);
     } catch (error) {
       statusMessage(res, false, error.message);
     }

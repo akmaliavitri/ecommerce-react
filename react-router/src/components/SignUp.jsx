@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
+import image from '../image/shopicon.png'
 
 import axios from "axios";
 
@@ -56,8 +57,11 @@ const SignUp = () => {
       <div>
         <div className="container">
           <div className="container-regis">
-            <div className="row justify-content-center">
-              <div className="col-md-6">
+            <div className="rowRegis">
+              <div className = "imageRegis">
+              <img src={image} className="card-img-top" alt="..." />
+              </div>
+              <div className="colregis">
                 <div className="card p-4">
                   <div className="card-body">
                     {alert && (

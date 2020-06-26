@@ -17,9 +17,7 @@ const MyChart = () => {
     } = await Axios.get("http://localhost:4000/chart", {
       headers: { access_token: localStorage.getItem("access_token") },
     });
-
-    // console.log(data._id, ">>id chart user");
-    console.log(data.items, "id product");
+    
     setChartId(data._id);
     setChartItems(data.items);
   };
@@ -31,26 +29,6 @@ const MyChart = () => {
     })
       .then((result) => {
         console.log("ini result", result);
-        getItemData();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const checkout = (_id, quantity) => {
-    console.log("id yang di checkout", _id);
-    console.log("quantity nya", quantity)
-
-    Axios.delete(
-      `http://localhost:4000/chart/checkout/${_id}`,
-      {
-        headers: { access_token: localStorage.getItem("access_token") },
-        data: { quantity }
-      },
-    )
-      .then((result) => {
-        console.log(result.data)
         getItemData();
       })
       .catch((err) => {
@@ -150,15 +128,16 @@ const MyChart = () => {
                     </button>
                   </div>
                 </div>
-                <i
-                  className="fa fa-shopping-cart"
-                  aria-hidden="true"
-                  onClick={() =>
-                    checkout(item.product._id, item.quantity)
-                  }
-                >
-                  Checkout
-                </i>
+                <div>
+                  <Link
+                    to = {{
+                      pathname: "/chart/checkout/" + item.product._id,
+                      state: {
+                        item : item,
+                      }
+                    }} > Checkout
+                  </Link>
+                </div>
                 <i
                   className="fa fa-trash"
                   aria-hidden="true"
