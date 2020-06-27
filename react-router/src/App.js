@@ -28,7 +28,7 @@ function App() {
           <Route exact path="/myChart" component={MyChart} />
           <Route exact path="/chart/:id/update/:productId" component={UpdateQuantity} />
           <Route exact path="/chart/checkout/:id" component={Checkout} />
-    <Footer />
+        <Footer />
       </BrowserRouter>
     </div>
   );

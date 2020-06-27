@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import Axios from "axios";
 
 const UpdateQuantity = (props) => {
-  const [ quantity, setQuantity ] = useState('')
+  const [quantity, setQuantity] = useState("");
 
-  let history = useHistory()
+  let history = useHistory();
 
   const handlerChange = (e) => {
-    setQuantity(e.target.value)
-  }
+    setQuantity(e.target.value);
+  };
 
   const handlerSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const { id, productId } = props.match.params
+    const { id, productId } = props.match.params;
 
     const result = await Axios.put(
       `http://localhost:4000/chart/${id}/update/${productId}`,
@@ -27,10 +27,10 @@ const UpdateQuantity = (props) => {
     );
     console.log(result.data, "ini data update");
     history.push("/myChart");
-  }
+  };
 
-    return (
-      <div>
+  return (
+    <div>
       <h1>Update Quantity Page</h1>
 
       <form>
@@ -49,8 +49,7 @@ const UpdateQuantity = (props) => {
         </table>
       </form>
     </div>
-    );
-  
-}
+  );
+};
 
 export default UpdateQuantity;

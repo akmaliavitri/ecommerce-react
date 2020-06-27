@@ -17,8 +17,9 @@ const MyChart = () => {
     } = await Axios.get("http://localhost:4000/chart", {
       headers: { access_token: localStorage.getItem("access_token") },
     });
-    
+    console.log(data, "dataaaaaa")
     setChartId(data._id);
+    console.log(data._id, "setChartID")
     setChartItems(data.items);
   };
 
@@ -130,12 +131,15 @@ const MyChart = () => {
                 </div>
                 <div>
                   <Link
-                    to = {{
+                    to={{
                       pathname: "/chart/checkout/" + item.product._id,
                       state: {
-                        item : item,
-                      }
-                    }} > Checkout
+                        item: item,
+                      },
+                    }}
+                  >
+                    {" "}
+                    Checkout
                   </Link>
                 </div>
                 <i
