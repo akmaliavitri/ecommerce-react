@@ -95,9 +95,8 @@ module.exports = {
     // statusMessage(res, true, "success checkout item");
 
     try {
-
-      const { id } = req.params
-      const { quantity } = req.body
+      const { id } = req.params;
+      const { quantity } = req.body;
 
       await Product.findOneAndUpdate(
         { _id: id },
@@ -124,27 +123,23 @@ module.exports = {
   },
 
   chekoutCheck: async (req, res) => {
-    console.log("ids", req.body.ids);
-    console.log("quantities", req.body.quantities);
     try {
-      const { ids } = req.body;
+      const getChart = await Chart.findOne({ user: req.userData.id });
+      const items = getChart.items;
+      items.forEach(async (item) => {
+        
+        await Product.update(
+          { _id: item.product._id },
+          { $inc: { stock: - item.quantity } }
+        );
+      });
 
-      const checkoutData = await Product.updateMany({ _id: ids }, { $inc: { stock: -2 } });
-      console.log("checkout data", checkoutData)
-
-      const check = {
-        $pull: {
-          items: {
-            product: ids,
-          },
-        },
-      };
-
-      const dataCheck = await Chart.updateMany(
+      const dataCheck = await Chart.update(
         { user: req.userData.id },
-        check
+        { items: [] }
       );
-      statusMessage(res, true, "success checkout many item", dataCheck);
+        console.log(">>>>dataCheck", dataCheck)
+      statusMessage(res, true, "success checkout many item");
     } catch (error) {
       statusMessage(res, false, error.message);
     }
