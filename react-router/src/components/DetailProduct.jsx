@@ -31,37 +31,59 @@ const Chart = () => {
   };
 
   return (
-    <div className="container-page-product">
-      <div>
-        <div className="card" id="detail-product">
-          <img src={product.image_url} className="card-img-top" alt="..." />
-          <div className="card-body">
-            <h5 className="card-title">{product.name}</h5>
-            <p className="card-text">{product.price}</p>
-            <p className="card-text">{product.stock}</p>
-            <p className="card-text">{product.quantity}</p>
-          </div>
+    <div>
+      <div className="container-regis">
+        <div className="container px-lg-5">
+          <div className="row mx-lg-n5">
+            <div className="col py-3 px-lg-5 border bg-light">
+              <img
+                id="signupimg"
+                src={product.image_url}
+                className="card-img-top"
+                alt="..."
+              />
+            </div>
+            <div className="col py-3 px-lg-5 border bg-light">
+              <div className="colregis">
+                <div className="card p-4">
+                  <div className="form-gorup">
+                    <label> Product Name :</label>
+                    <input className="form-control" value={product.name} />
+                  </div>
 
-          <div>
-            <Link to="/product">
-              <i>Back</i>
-            </Link>{" "}
-            |
-            <Link
-              to={{
-                pathname: "/myChart",
-                state: {
-                  product: product,
-                },
-              }}
-            >
-              <button
-                className="btn btn-primary"
-                onClick={() => addNewItem(product._id)}
-              >
-                Submit
-              </button>
-            </Link>
+                  <div className="form-gorup">
+                    <label> Price :</label>
+                    <input className="form-control" value={product.price} />
+                  </div>
+
+                  <div className="form-gorup">
+                    <label> Stock :</label>
+                    <input className="form-control" value={product.stock} />
+                  </div><br/>
+
+                  <div>
+                    <Link to="/product">
+                      <i>Back</i>
+                    </Link>{" "}
+                    <Link
+                      to={{
+                        pathname: "/myChart",
+                        state: {
+                          product: product,
+                        },
+                      }}
+                    >
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => addNewItem(product._id)}
+                      >
+                        Add to chart
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

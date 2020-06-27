@@ -15,25 +15,37 @@ const Navbar = () => {
               </li>
             </Link>
           </ul>
-          <Link to="/product/add">
+
+          <div>
+            <Link to="/product/add">
+              <button className="btn btn-primary" id="nav-btn-add">
+                Add Product
+              </button>
+            </Link>
+          </div>
+          
+          <div>
+            <Link to="/myChart">
             <button className="btn btn-primary" id="nav-btn-add">
-              Add Product
+              <i
+                className="fa fa-cart-plus "
+                id="nav-add-chart"
+                aria-hidden="true"
+              >
+                Chart
+              </i>
             </button>
           </Link>
-          <Link to="/signin">
-            <button className="btn btn-primary" id="nav-btn-logout">
-              Logout
-            </button>
-          </Link>
-          <Link to="/myChart">
-            <i
-              className="fa fa-cart-plus fa-2x"
-              id="nav-add-chart"
-              aria-hidden="true"
-            >
-              Chart
-            </i>
-          </Link>
+          </div>
+
+          <div>
+            <Link to="/signin">
+              <button className="btn btn-dark" id="nav-btn-logout">
+                Logout
+              </button>
+            </Link>
+          </div>
+
         </div>
       </nav>
     </div>

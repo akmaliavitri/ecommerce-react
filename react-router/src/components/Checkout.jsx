@@ -29,31 +29,66 @@ const CheckOut = () => {
     <Fragment>
       {redirect && <Redirect to="/myChart" />}
 
-      <div className="container-page-product">
-        <div>
-          <div className="card" id="detail-product">
-            <img
-              src={item.product.image_url}
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <h5 className="card-title">{item.product.name}</h5>
-              <p className="card-text">{item.product.price}</p>
-              <p className="card-text">{item.product.stock}</p>
-              <p className="card-text">{item.quantity}</p>
-            </div>
+      <div>
+        <div className="container-regis">
+          <div className="container px-lg-5">
+            <div className="row mx-lg-n5">
+              <div className="col py-3 px-lg-5 border bg-light">
+                <img
+                  id="signupimg"
+                  src={item.product.image_url}
+                  className="card-img-top"
+                  alt="..."
+                />
+              </div>
+              <div className="col py-3 px-lg-5 border bg-light">
+                <div className="colregis">
+                  <div className="card p-4">
+                    <div className="form-gorup">
+                      <label> Product Name :</label>
+                      <input
+                        className="form-control"
+                        value={item.product.name}
+                      />
+                    </div>
 
-            <div>
-              <button>
-                <i
-                  className="fa fa-shopping-cart"
-                  aria-hidden="true"
-                  onClick={() => checkout(item.product._id, item.quantity)}
-                >
-                  Checkout
-                </i>
-              </button>
+                    <div className="form-gorup">
+                      <label> Price :</label>
+                      <input
+                        className="form-control"
+                        value={item.product.price}
+                      />
+                    </div>
+
+                    <div className="form-gorup">
+                      <label> Stock :</label>
+                      <input
+                        className="form-control"
+                        value={item.product.stock}
+                      />
+                    </div>
+
+                    <div className="form-gorup">
+                      <label> Quantity :</label>
+                      <input className="form-control" value={item.quantity} />
+                    </div>
+
+                    <div>
+                      <button>
+                        <i
+                          className="fa fa-shopping-cart"
+                          aria-hidden="true"
+                          onClick={() =>
+                            checkout(item.product._id, item.quantity)
+                          }
+                        >
+                          Checkout
+                        </i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -31,23 +31,32 @@ const UpdateQuantity = (props) => {
 
   return (
     <div>
-      <h1>Update Quantity Page</h1>
+        <div className="container">
+          <div className="container-updateProduct">
+            <h2>Update Quantity</h2>
+            <div className="row justify-content-center">
+              <div className="col-md-6">
+                <div className="card p-4">
 
-      <form>
-        <table>
-          <tbody>
-            <tr>
-              <td>quantity </td>
-              <td>
-                <input type="Number" name="quantity" onChange={handlerChange} />
-              </td>
-              <td>
-                <button onClick={handlerSubmit}>Submit</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
+                  <div className="from-group">
+                    <label>Image URL :</label>
+                    <input
+                      type="Number"
+                      className="form-control"
+                      id="quantity"
+                      onChange={handlerChange}
+                    />
+                  </div><br />
+
+                  <button className="btn btn-primary" onClick={handlerSubmit}>
+                    Update
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   );
 };

@@ -1,316 +1,65 @@
-import React, { useState, useEffect } from "react";
-import Axios from "axios";
-import { Link } from "react-router-dom";
+import React, { useState, Fragment } from "react";
+import { useLocation, Redirect } from "react-router-dom";
+import axios from "axios";
 
-const MyChart = () => {
-  const [charItems, setChartItems] = useState([]);
-  const [chartId, setChartId] = useState([]);
-  const [quantity, setQuantity] = useState(1);
-
-  useEffect(() => {
-    getItemData();
-  }, []);
-
-  const getItemData = async () => {
-    const {
-      data: { data },
-    } = await Axios.get("http://localhost:4000/chart", {
-      headers: { access_token: localStorage.getItem("access_token") },
-    });
-
-    // console.log(data._id, ">>id chart user");
-    // console.log(data.items, "id product");
-    setChartId(data._id);
-    setChartItems(data.items);
-  };
-
-  const removeItem = (_id) => {
-    console.log("ini idnya", _id);
-    Axios.delete(`http://localhost:4000/chart/delete/${_id}`, {
-      headers: { access_token: localStorage.getItem("access_token") },
-    })
-      .then((result) => {
-        console.log("ini result", result);
-        getItemData();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+const CheckOut = () => {
+  const { state } = useLocation();
+  const item = state.item;
+  const [redirect, setRedirect] = useState(false);
 
   const checkout = (_id, quantity) => {
     console.log("id yang di checkout", _id);
-    console.log("quantity nya", quantity)
+    console.log("quantity nya", quantity);
 
-    Axios.delete(
-      `http://localhost:4000/chart/checkout/${_id}`,
-      {
+    axios
+      .delete(`http://localhost:4000/chart/checkout/${_id}`, {
         headers: { access_token: localStorage.getItem("access_token") },
-        data: { quantity }
-      },
-    )
+        data: { quantity },
+      })
       .then((result) => {
-        console.log(result.data)
-        getItemData();
+        console.log(result.data);
+        setRedirect(true);
       })
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const inCreament = async (item) => {
-    await Axios.put(
-      `http://localhost:4000/chart/increament/${chartId}/update/${item.product._id}`,
-      {
-        quantity,
-      },
-      {
-        headers: { access_token: localStorage.getItem("access_token") },
-      }
-    );
-    getItemData();
-  };
-
-  const decCrement = async (item) => {
-    console.log(item);
-    await Axios.put(
-      `http://localhost:4000/chart/decrement/${chartId}/update/${item.product._id}`,
-      {
-        quantity,
-      },
-      {
-        headers: { access_token: localStorage.getItem("access_token") },
-      }
-    );
-    getItemData();
   };
 
   return (
-    <div>
-      <h2>MyChart</h2>
-      <table className="table">
-        <thead className="thead-light">
-          <tr>
-            <th scope="col">Check</th>
-            <th scope="col">No</th>
-            <th scope="col">Name</th>
-            <th scope="col">Image-Url</th>
-            <th scope="col">Price</th>
-            <th scope="col">Stock</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Total Price</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {charItems.map((item, index) => (
-            <tr key={index}>
-              <th>
-                <input type="checkbox" id="checkChcekout"></input>
-              </th>
-              <th>{index + 1}</th>
-              <td>{item.product.name}</td>
-              <td>
-                <img
-                  src={item.product.image_url}
-                  className="card-img-top"
-                  alt="..."
-                />
-              </td>
-              <td>Rp. {item.product.price}</td>
-              <td>{item.product.stock}</td>
-              <td>{item.quantity}</td>
-              <td>Rp. {item.quantity * item.product.price}</td>
-              <td>
-                <div>
-                  <div
-                    className="btn-group"
-                    role="group"
-                    aria-label="Basic example"
-                  >
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      onClick={() => decCrement(item)}
-                    >
-                      -
-                    </button>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="name-product"
-                      placeholder="1"
-                    />
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      onClick={() => inCreament(item)}
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
+    <Fragment>
+      {redirect && <Redirect to="/myChart" />}
+
+      <div className="container-page-product">
+        <div>
+          <div className="card" id="detail-product">
+            <img
+              src={item.product.image_url}
+              className="card-img-top"
+              alt="..."
+            />
+            <div className="card-body">
+              <h5 className="card-title">{item.product.name}</h5>
+              <p className="card-text">{item.product.price}</p>
+              <p className="card-text">{item.product.stock}</p>
+              <p className="card-text">{item.quantity}</p>
+            </div>
+
+            <div>
+              <button>
                 <i
                   className="fa fa-shopping-cart"
                   aria-hidden="true"
-                  onClick={() =>
-                    checkout(item.product._id, item.quantity)
-                  }
+                  onClick={() => checkout(item.product._id, item.quantity)}
                 >
                   Checkout
                 </i>
-                <i
-                  className="fa fa-trash"
-                  aria-hidden="true"
-                  onClick={() => removeItem(item.product._id)}
-                >
-                  Delete
-                </i>
-                <div>
-                  <Link
-                    to={"/chart/" + chartId + "/update/" + item.product._id}
-                  >
-                    Update
-                  </Link>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-        <div>
-          <i>Checkout All</i>
+              </button>
+            </div>
+          </div>
         </div>
-      </table>
-    </div>
+      </div>
+    </Fragment>
   );
 };
-import React, { Component } from 'react'
-import axios from "axios";
 
-export class UpdateProduct extends Component {
-  state = {
-    id: "",
-    name: "",
-    image_url: "",
-    price: "",
-    stock: "",
-    isEdit: false
-  };
-
-  componentDidMount = () => {
-    const { id } = this.props.match.params;
-    console.log(id, "ini id nya")
-    axios
-      .get(`http://localhost:4000/product/${id}`, {
-        headers: { access_token: localStorage.getItem("access_token") },
-      })
-      .then((response) => {
-        console.log(response.data);
-        this.setState({ ...response.data, isEdit: true });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  handlerChange = (e) => {
-    const key = e.target.name;
-    this.setState({ [key]: e.target.value });
-  };
-
-  handlerSubmit = async (e) => {
-    e.preventDefault();
-
-    const { id } = this.props.match.params;
-    console.log("ini id nya", id);
-
-    const dataUpdate = {
-      name: this.state.name,
-      image_url: this.state.image_url,
-      stock: this.state.stock,
-      price: this.state.price,
-    };
-
-    console.log("data yang diinput", dataUpdate);
-
-    const result = await axios.put(
-      `http://localhost:4000/product/update/${id}`,
-      dataUpdate,
-      {
-        headers: { access_token: localStorage.getItem("access_token") },
-      }
-    );
-    this.setState({ ...result.data, isEdit: false });
-  };
-
-  render() {
-    return (
-    
-      <div className="container">
-        <h2>Update Food</h2>
-
-        <form onSubmit={this.handlerSubmit}>
-          <table>
-            <tbody>
-              <tr>
-                <td>Name </td>
-                <td>
-                  <input
-                    type="text"
-                    name="name"
-                    onChange={this.handlerChange}
-                    />
-                </td>
-              </tr>
-              <tr>
-                <td>image-URL </td>
-                <td>
-                  <input
-                    type="text"
-                    name="image_url"
-                    onChange={this.handlerChange}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>Price </td>
-                <td>
-                  <input
-                    type="number"
-                    name="price"
-                    onChange={this.handlerChange}
-                    />
-                </td>
-              </tr>
-              <tr>
-                <td>Stock </td>
-                <td>
-                  <input
-                    type="number"
-                    name="stock"
-                    onChange={this.handlerChange}
-                    />
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>
-                  <input
-                    type="submit"
-                    value="Edit"
-                    className="btn btn-primary"
-                    onChange={this.handlerChange}
-                    />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
-     
-    );
-  }
-}
-
-export default UpdateProduct
-export default MyChart;
+export default CheckOut;

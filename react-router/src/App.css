@@ -37,49 +37,12 @@
   }
 }
 
-/* Login */
-.container-login{
-  margin-top: 130px;
+.container-regis {
+  padding: 8%;
 }
 
-/* Regis */
-.container-regis{
-  margin-top: 110px
-}
-
-.rowRegis {
-  display: grid;
-  grid-template-columns: 100px 100px 100px;
-  grid-gap: 10px;
-  background-color: #fff;
-  color: #444;
-}
-
-/* product */
-.card{
-  width: 18rem;
-}
-
-/* add Product */
-.container-AddProduct{
-  margin-top: 100px;
-}
-
-/* list product */
-.card{
-  width: 18rem;
-  background-color: #D68B74;
-} 
-
-.product-title{
-  margin: 20px;
-}
-
-.container-product {
-  display: grid;
-  margin: 4% 8% 4% 10%; 
-  grid-template-columns: repeat(4, 1fr);
-  grid-row-gap: 50px;
+.container-login {
+  padding: 8%;
 }
 
 .card-img-top {
@@ -91,30 +54,24 @@
   height: 220px;
 }
 
-#nav-btn-add{
-  margin: 20px;
+.wrapper {
+  border-radius: 10%;
+  padding: 2%;
 }
 
-#nav-add-chart{
-  /* background-color: blue; */
-  margin: 20px;
-  color: white;
-  padding: 5px 5px 5px 5px;
-  border-radius: 5px;
+.container-product {
+  display: grid;
+  margin: 4% 8% 4% 10%; 
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 50px;
+  border-radius: 5%;
 }
 
-#detail-product{
-  width: 50%;
-}
+.card{
+  width: 18rem;
+} 
 
-.col-md-6{
-  background-color: #61dafb;
-}
-
-/* .col-md-8{
-  background-color: blue;
-} */
-
-.col-md-4{
-  background-color: chartreuse;
+.container-updateProduct {
+  padding: 4%;
+  margin: 4% 16% 13% 17%; 
 }

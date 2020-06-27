@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
-import image from '../image/shopicon.png'
+import image from "../image/signup.jpg";
 
 import axios from "axios";
 
@@ -55,12 +55,13 @@ const SignUp = () => {
       {redirect && <Redirect to="/signin" />}
 
       <div>
-        <div className="container">
-          <div className="container-regis">
-            <div className="rowRegis">
-              <div className = "imageRegis">
-              <img src={image} className="card-img-top" alt="..." />
+        <div className="container-regis">
+          <div className="container px-lg-5">
+            <div className="row mx-lg-n5">
+              <div className="col py-3 px-lg-5 border bg-light">
+                <img id = "signupimg" src={image} className="card-img-top" alt="..." />
               </div>
+              <div className="col py-3 px-lg-5 border bg-light">
               <div className="colregis">
                 <div className="card p-4">
                   <div className="card-body">
@@ -106,13 +107,15 @@ const SignUp = () => {
                       value={password}
                       onChange={onChangePassword}
                     />
-                  </div>
+                  </div><br></br>
 
                   <button className="btn btn-primary" onClick={regis}>
                     Sign Up
                   </button>
+
                   <Link to="/signin">Already have an account ? sign in</Link>
                 </div>
+              </div>
               </div>
             </div>
           </div>

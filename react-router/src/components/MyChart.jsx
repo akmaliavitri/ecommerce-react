@@ -6,6 +6,7 @@ const MyChart = () => {
   const [charItems, setChartItems] = useState([]);
   const [chartId, setChartId] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  // const [isCheck, setCheck] = useState(false)
 
   useEffect(() => {
     getItemData();
@@ -17,9 +18,9 @@ const MyChart = () => {
     } = await Axios.get("http://localhost:4000/chart", {
       headers: { access_token: localStorage.getItem("access_token") },
     });
-    console.log(data, "dataaaaaa")
+    console.log(data, "dataaaaaa");
     setChartId(data._id);
-    console.log(data._id, "setChartID")
+    console.log(data._id, "setChartID");
     setChartItems(data.items);
   };
 
@@ -87,8 +88,8 @@ const MyChart = () => {
               <th>
                 <input type="checkbox" id="checkChcekout"></input>
               </th>
-              <th>{index + 1}</th>
-              <td>{item.product.name}</td>
+              <th align="center">{index + 1}</th>
+              <td valign="center">{item.product.name}</td>
               <td>
                 <img
                   src={item.product.image_url}
@@ -96,10 +97,10 @@ const MyChart = () => {
                   alt="..."
                 />
               </td>
-              <td>Rp. {item.product.price}</td>
-              <td>{item.product.stock}</td>
-              <td>{item.quantity}</td>
-              <td>Rp. {item.quantity * item.product.price}</td>
+              <td align="center">Rp. {item.product.price}</td>
+              <td align="center">{item.product.stock}</td>
+              <td align="center">{item.quantity}</td>
+              <td align="center">Rp. {item.quantity * item.product.price}</td>
               <td>
                 <div>
                   <div

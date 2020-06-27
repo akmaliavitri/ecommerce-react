@@ -138,7 +138,7 @@ module.exports = {
         { user: req.userData.id },
         { items: [] }
       );
-        console.log(">>>>dataCheck", dataCheck)
+      
       statusMessage(res, true, "success checkout many item");
     } catch (error) {
       statusMessage(res, false, error.message);

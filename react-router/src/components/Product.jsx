@@ -39,54 +39,59 @@ const Product = () => {
   }
 
   return (
-    <div className="container-page-product">
-      <div className="product-title">
-        <h1>Product Page</h1>
-      </div>
-      <div className="container-product">
-        {productList.map((product, index) => (
-          <div className="card" key={index}>
-            <img src={product.image_url} className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">{product.name}</h5>
-              <p className="card-text">Rp. {product.price}</p>
-              <p className="card-text">Stock :{product.stock}</p>
-              <div>
-                <Link to={"/product/update/" + product._id}>
-                  <i className="fa fa-pencil-square-o" aria-hidden="true">
-                    Update
-                  </i>
-                </Link>{" "}
-                |
-                <i
-                  className="fa fa-trash"
-                  aria-hidden="true"
-                  onClick={() => destroyProduct(product._id)}
-                >
-                  {" "}
-                  Delete
-                </i>{" "}
-                |
-                <Link
-                  to={{
-                    pathname: `/detailProduct`,
-                    state: {
-                      product: product,
-                    },
-                  }}
-                >
+    <div class="wrapper">
+        <div className="product-title">
+          <h1>Product Page</h1>
+        </div>
+      <div className="container-page-product">
+        <div className="container-product">
+          {productList.map((product, index) => (
+            <div className="card" key={index}>
+              <img src={product.image_url} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">{product.name}</h5>
+                <p className="card-text">Rp. {product.price}</p>
+                <p className="card-text">Stock :{product.stock}</p>
+                <div>
+                  <Link to={"/product/update/" + product._id}>
+                    <i className="fa fa-pencil-square-o" aria-hidden="true">
+                      Update
+                    </i>
+                  </Link>{" "}
+                  |
+                  <button type="button" class="btn btn-danger" onClick={() => destroyProduct(product._id)}>
+
                   <i
-                    className="fa fa-cart-plus fa"
-                    id="nav-add-chart"
+                    className="fa fa-trash"
                     aria-hidden="true"
+                    
                   >
-                    Add
-                  </i>
-                </Link>
+                    {" "}
+                    Delete
+                  </i>{" "}
+                  </button>
+                  |
+                  <Link
+                    to={{
+                      pathname: `/detailProduct`,
+                      state: {
+                        product: product,
+                      },
+                    }}
+                  >
+                    <i
+                      className="fa fa-cart-plus fa"
+                      id="nav-add-chart"
+                      aria-hidden="true"
+                    >
+                      Add
+                    </i>
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

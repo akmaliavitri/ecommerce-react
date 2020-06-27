@@ -49,44 +49,64 @@ const UpdateProduct = (props) => {
   };
 
   return (
-    <div className="container">
-      <h2>Update Food</h2>
+    <div>
+        <div className="container">
+          <div className="container-updateProduct">
+            <h2>Update Product</h2>
+            <div className="row justify-content-center">
+              <div className="col-md-6">
+                <div className="card p-4">
+                  <div className="form-gorup">
+                    <label> Product Name :</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name-product"
+                      placeholder="ex : mobil"
+                      onChange={onChangeName}
+                    />
+                  </div>
 
-      <form>
-        <table>
-          <tbody>
-            <tr>
-              <td>Name </td>
-              <td>
-                <input type="text" name="name" onChange={onChangeName} />
-              </td>
-            </tr>
-            <tr>
-              <td>image-URL </td>
-              <td>
-                <input type="text" name="image_url" onChange={onChangeImage} />
-              </td>
-            </tr>
-            <tr>
-              <td>Price </td>
-              <td>
-                <input type="number" name="price" onChange={onChangePrice} />
-              </td>
-            </tr>
-            <tr>
-              <td>Stock </td>
-              <td>
-                <input type="number" name="stock" onChange={onChangeStock} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button onClick={updatePost}>Submit</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
+                  <div className="from-group">
+                    <label>Price :</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="price-product"
+                      placeholder="ex : 200000"
+                      onChange={onChangePrice}
+                    />
+                  </div>
+
+                  <div className="from-group">
+                    <label>Stock :</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="stock-product"
+                      placeholder="ex : 20"
+                      onChange={onChangeStock}
+                    />
+                  </div>
+
+                  <div className="from-group">
+                    <label>Image URL :</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="image-product"
+                      placeholder="ex : https://med.........1"
+                      onChange={onChangeImage}
+                    />
+                  </div><br />
+                  <button className="btn btn-primary" onClick={updatePost}>
+                    Update
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   );
 };
