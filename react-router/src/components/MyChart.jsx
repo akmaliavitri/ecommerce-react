@@ -116,12 +116,15 @@ const MyChart = () => {
                     >
                       -
                     </button>
+                    <div className="inputquantity">
                     <input
                       type="text"
                       className="form-control"
                       id="name-product"
-                      placeholder="1"
+                      value={item.quantity}
+                      disabled
                     />
+                    </div>
                     <button
                       style={{ backgroundColor: "#FF613A" }}
                       type="button"
@@ -159,15 +162,7 @@ const MyChart = () => {
                     </i>{" "}
                   </button>
 
-                  <Link
-                    to={"/chart/" + chartId + "/update/" + item.product._id}
-                  >
-                    <button className="btn btn-primary" id="nav-btn-add">
-                      <i className="fa fa-pencil-square-o" aria-hidden="true">
-                        {/* Update */}
-                      </i>
-                    </button>
-                  </Link>
+                  
                 </div>
               </td>
             </tr>

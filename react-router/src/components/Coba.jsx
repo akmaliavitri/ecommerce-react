@@ -123,3 +123,13 @@ export default Product;
   margin-top: 5%; */
   align-content: center;
 }
+
+<Link
+                    to={"/chart/" + chartId + "/update/" + item.product._id}
+                  >
+                    <button className="btn btn-primary" id="nav-btn-add">
+                      <i className="fa fa-pencil-square-o" aria-hidden="true">
+                        {/* Update */}
+                      </i>
+                    </button>
+                  </Link>
