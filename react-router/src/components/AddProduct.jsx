@@ -61,11 +61,12 @@ const AddProduct = () => {
       {redirect && <Redirect to="/product" />}
 
       <div>
-        <div className="container">
+        <div className="container-add">
           <div className="container-AddProduct">
             <div className="row justify-content-center">
               <div className="col-md-6">
-                <div className="card p-4">
+                <div className="card p-4" style={{backgroundColor : '#FF613A'}}>
+                  <h2>Add product</h2>
                   <div className="form-gorup">
                     <label> Product Name :</label>
                     <input
@@ -112,7 +113,7 @@ const AddProduct = () => {
                       value={image_url}
                       onChange={onChangeImage}
                     />
-                  </div>
+                  </div><br />
                   <button className="btn btn-primary" onClick={addNewProduct}>
                     Submit
                   </button>

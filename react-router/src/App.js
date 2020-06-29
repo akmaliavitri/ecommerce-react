@@ -8,7 +8,6 @@ import Product from "./components/Product";
 import AddProduct from "./components/AddProduct";
 import UpdateProduct from "./components/UpdateProduct";
 import Navbar from "./components/Navbar";
-import Footer from "./components/footer";
 import DetailProduct from "./components/DetailProduct";
 import MyChart from "./components/MyChart";
 import UpdateQuantity from "./components/UpdateQuantity";
@@ -28,7 +27,6 @@ function App() {
           <Route exact path="/myChart" component={MyChart} />
           <Route exact path="/chart/:id/update/:productId" component={UpdateQuantity} />
           <Route exact path="/chart/checkout/:id" component={Checkout} />
-        <Footer />
       </BrowserRouter>
     </div>
   );

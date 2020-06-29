@@ -32,10 +32,10 @@ const Chart = () => {
 
   return (
     <div>
-      <div className="container-regis">
-        <div className="container px-lg-5">
-          <div className="row mx-lg-n5">
-            <div className="col py-3 px-lg-5 border bg-light">
+      <div className="container-regis ">
+        <div className="container px-lg-5 d-flex justify-content-center align-items-center">
+          <div className="row mx-lg-n5" style={{backgroundColor : '#FF613A'}}>
+            <div className="col py-3 px-lg-5 border">
               <img
                 id="signupimg"
                 src={product.image_url}
@@ -43,27 +43,30 @@ const Chart = () => {
                 alt="..."
               />
             </div>
-            <div className="col py-3 px-lg-5 border bg-light">
+            <div className="col py-3 px-lg-5 border">
               <div className="colregis">
                 <div className="card p-4">
                   <div className="form-gorup">
                     <label> Product Name :</label>
-                    <input className="form-control" value={product.name} />
+                    <input className="form-control" value={product.name}  disabled={true}/>
                   </div>
 
                   <div className="form-gorup">
                     <label> Price :</label>
-                    <input className="form-control" value={product.price} />
+                    <input className="form-control" value={product.price} disabled/>
                   </div>
 
                   <div className="form-gorup">
                     <label> Stock :</label>
-                    <input className="form-control" value={product.stock} />
-                  </div><br/>
+                    <input className="form-control" value={product.stock} disabled={true}/>
+                  </div>
+                  <br />
 
                   <div>
                     <Link to="/product">
-                      <i>Back</i>
+                      <button className="btn btn-success">
+                        <i>Back</i>
+                      </button>
                     </Link>{" "}
                     <Link
                       to={{

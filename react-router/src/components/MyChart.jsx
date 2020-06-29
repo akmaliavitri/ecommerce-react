@@ -109,6 +109,7 @@ const MyChart = () => {
                     aria-label="Basic example"
                   >
                     <button
+                      style={{ backgroundColor: "#FF613A" }}
                       type="button"
                       className="btn btn-secondary"
                       onClick={() => decCrement(item)}
@@ -122,6 +123,7 @@ const MyChart = () => {
                       placeholder="1"
                     />
                     <button
+                      style={{ backgroundColor: "#FF613A" }}
                       type="button"
                       className="btn btn-secondary"
                       onClick={() => inCreament(item)}
@@ -131,6 +133,8 @@ const MyChart = () => {
                   </div>
                 </div>
                 <div>
+                  <br/>
+
                   <Link
                     to={{
                       pathname: "/chart/checkout/" + item.product._id,
@@ -139,22 +143,30 @@ const MyChart = () => {
                       },
                     }}
                   >
-                    {" "}
-                    Checkout
+                    <button className="btn btn-primary" id="nav-btn-add">
+                    <i className="fa fa-shopping-bag"></i>
+                    </button>
                   </Link>
-                </div>
-                <i
-                  className="fa fa-trash"
-                  aria-hidden="true"
-                  onClick={() => removeItem(item.product._id)}
-                >
-                  Delete
-                </i>
-                <div>
+
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    onClick={() => removeItem(item.product._id)}
+                  >
+                    <i className="fa fa-trash" aria-hidden="true">
+                      {" "}
+                      {/* Delete */}
+                    </i>{" "}
+                  </button>
+
                   <Link
                     to={"/chart/" + chartId + "/update/" + item.product._id}
                   >
-                    Update
+                    <button className="btn btn-primary" id="nav-btn-add">
+                      <i className="fa fa-pencil-square-o" aria-hidden="true">
+                        {/* Update */}
+                      </i>
+                    </button>
                   </Link>
                 </div>
               </td>

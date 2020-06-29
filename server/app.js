@@ -23,14 +23,6 @@ db.once("open", function () {
 });
 
 const router = require("./routers");
-// const connection = mongoose.connection;
-// connection
-//   .once("open", () => {
-//     console.log("mongoDB database connection established");
-//   })
-//   .on("error", (err) => {
-//     console.log("Error: ", err);
-//   });
 
 app.use(cors());
 app.use(express.json());

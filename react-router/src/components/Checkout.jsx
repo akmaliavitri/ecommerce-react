@@ -31,60 +31,66 @@ const CheckOut = () => {
 
       <div>
         <div className="container-regis">
-          <div className="container px-lg-5">
-            <div className="row mx-lg-n5">
-              <div className="col py-3 px-lg-5 border bg-light">
-                <img
-                  id="signupimg"
-                  src={item.product.image_url}
-                  className="card-img-top"
-                  alt="..."
-                />
-              </div>
-              <div className="col py-3 px-lg-5 border bg-light">
-                <div className="colregis">
-                  <div className="card p-4">
-                    <div className="form-gorup">
-                      <label> Product Name :</label>
-                      <input
-                        className="form-control"
-                        value={item.product.name}
-                      />
-                    </div>
-
-                    <div className="form-gorup">
-                      <label> Price :</label>
-                      <input
-                        className="form-control"
-                        value={item.product.price}
-                      />
-                    </div>
-
-                    <div className="form-gorup">
-                      <label> Stock :</label>
-                      <input
-                        className="form-control"
-                        value={item.product.stock}
-                      />
-                    </div>
-
-                    <div className="form-gorup">
-                      <label> Quantity :</label>
-                      <input className="form-control" value={item.quantity} />
-                    </div>
-
-                    <div>
-                      <button>
-                        <i
-                          className="fa fa-shopping-cart"
-                          aria-hidden="true"
-                          onClick={() =>
-                            checkout(item.product._id, item.quantity)
-                          }
-                        >
-                          Checkout
-                        </i>
-                      </button>
+          <div className="container " >
+            <div className="col py-3 px-lg-5 px-lg-5 d-flex justify-content-center align-items-center">
+              <div className="row mx-lg-n5" style={{backgroundColor : '#FF613A'}}>
+                <div className="col py-3 px-lg-5 border">
+                  <img
+                    id="signupimg"
+                    src={item.product.image_url}
+                    className="imagecheckout"
+                    alt="..."
+                  />
+                </div>
+                <div className="col py-3 px-lg-5 border">
+                  <div className="colregis">
+                    <div className="card p-4">
+                      <div className="form-gorup">
+                        <label> Product Name :</label>
+                        <input
+                          disabled={true}
+                          className="form-control"
+                          value={item.product.name}
+                        />
+                      </div>
+                      <div className="form-gorup">
+                        <label> Price :</label>
+                        <input
+                          disabled={true}
+                          className="form-control"
+                          value={item.product.price}
+                        />
+                      </div>
+                      <div className="form-gorup">
+                        <label> Stock :</label>
+                        <input
+                          disabled={true}
+                          className="form-control"
+                          value={item.product.stock}
+                        />
+                      </div>
+                      <div className="form-gorup">
+                        <label> Quantity :</label>
+                        <input
+                          disabled={true}
+                          className="form-control"
+                          value={item.quantity}
+                        />
+                      </div>{" "}
+                      <br />
+                      <div>
+                        <button className="btn btn-primary">
+                          <i
+                            className="fa fa-shopping-cart"
+                            aria-hidden="true"
+                            onClick={() =>
+                              checkout(item.product._id, item.quantity)
+                            }
+                          >
+                            Checkout
+                          </i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

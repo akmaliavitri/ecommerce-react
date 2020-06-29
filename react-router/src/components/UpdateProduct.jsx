@@ -50,12 +50,12 @@ const UpdateProduct = (props) => {
 
   return (
     <div>
-        <div className="container">
+        <div className="container-update">
           <div className="container-updateProduct">
-            <h2>Update Product</h2>
             <div className="row justify-content-center">
               <div className="col-md-6">
-                <div className="card p-4">
+                <div className="card p-4" style={{backgroundColor : '#FF613A'}}>
+                  <h2>Update Product</h2>
                   <div className="form-gorup">
                     <label> Product Name :</label>
                     <input
