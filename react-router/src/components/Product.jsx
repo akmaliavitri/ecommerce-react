@@ -39,31 +39,28 @@ const Product = () => {
   }
 
   return (
-    <div class="wrapper">
-      <div className="product-title">
-        <h1>Product Page</h1>
-      </div>
-      <div className="container-page-product ">
-        <div className="container-product ">
+    <div className="container">
+      <h2>Product List</h2>
+      <div className="cardProduct d-flex justify-content-center align-items-center">
+        <div className="productList">
           {productList.map((product, index) => (
-            <div className="card-product">
-            <div className="card" key={index}>
-             <img src={product.image_url} className="card-img-top" alt="..." />
+            <div className="card " key={index}>
+              <img src={product.image_url} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
-                <p className="card-text" style={{color :'#FF613A'}}>Rp. {product.price}</p>
-                <p className="card-text">Stock :{product.stock}</p>
+                <p className="card-text" style={{ color: "#FF613A" }}>
+                  Rp. {product.price}
+                </p>
+                <p className="card-text">{product.stock}</p>
 
                 <div>
-
-                    <Link to={"/product/update/" + product._id}>
-                      <button className="btn btn-primary" id="nav-btn-add">
-                        <i className="fa fa-pencil-square-o" aria-hidden="true">
-                          {/* Update */}
-                        </i>
-                      </button>
-                    </Link>{" "}
-                  
+                  <Link to={"/product/update/" + product._id}>
+                    <button className="btn btn-primary" id="nav-btn-add">
+                      <i className="fa fa-pencil-square-o" aria-hidden="true">
+                        {/* Update */}
+                      </i>
+                    </button>
+                  </Link>{" "}
                   <button
                     type="button"
                     class="btn btn-danger"
@@ -74,29 +71,26 @@ const Product = () => {
                       {/* Delete */}
                     </i>{" "}
                   </button>
-
-                    <Link
-                      to={{
-                        pathname: `/detailProduct`,
-                        state: {
-                          product: product,
-                        },
-                      }}
-                    >
-                      <button className="btn btn-primary" id="nav-btn-add">
-                        <i
-                          className="fa fa-cart-plus fa"
-                          id="nav-add-chart"
-                          aria-hidden="true"
-                        >
-                          {/* Detail */}
-                        </i>
-                      </button>
-                    </Link>
-                  
+                  <Link
+                    to={{
+                      pathname: `/detailProduct`,
+                      state: {
+                        product: product,
+                      },
+                    }}
+                  >
+                    <button className="btn btn-primary" id="nav-btn-add">
+                      <i
+                        className="fa fa-cart-plus fa"
+                        id="nav-add-chart"
+                        aria-hidden="true"
+                      >
+                        {/* Detail */}
+                      </i>
+                    </button>
+                  </Link>
                 </div>
               </div>
-             </div>
             </div>
           ))}
         </div>

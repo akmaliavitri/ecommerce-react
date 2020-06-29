@@ -58,7 +58,7 @@ const SignUp = () => {
         <div className="container-regis">
           <div className="container px-lg-5">
             <div
-              className="row mx-lg-n5"
+              className="row mx-lg-n5 border d-flex justify-content-center align-items-center"
               style={{ backgroundColor: "#FF613A" }}
             >
               <div className="col py-3 px-lg-5 border ">
@@ -71,7 +71,7 @@ const SignUp = () => {
               </div>
               <div className="col py-3 px-lg-5 border d-flex justify-content-center align-items-center">
                 <div>
-                  <div className="card p-4" id="colsignup">
+                  <div className="card p-4" id="colsignup" >
                     <div className="card-body">
                       {alert && (
                         <div className="alert alert-primary" role="alert">

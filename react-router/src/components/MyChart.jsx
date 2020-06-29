@@ -133,7 +133,7 @@ const MyChart = () => {
                   </div>
                 </div>
                 <div>
-                  <br/>
+                  <br />
 
                   <Link
                     to={{
@@ -144,7 +144,7 @@ const MyChart = () => {
                     }}
                   >
                     <button className="btn btn-primary" id="nav-btn-add">
-                    <i className="fa fa-shopping-bag"></i>
+                      <i className="fa fa-shopping-bag"></i>
                     </button>
                   </Link>
 
