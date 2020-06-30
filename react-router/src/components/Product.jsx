@@ -21,7 +21,6 @@ const Product = () => {
   };
 
   const destroyProduct = (_id) => {
-    // console.log(_id);
     axios
       .delete(`http://localhost:4000/product/delete/${_id}`, {
         headers: { access_token: localStorage.getItem("access_token") },

@@ -98,7 +98,7 @@ const MyChart = () => {
                 />
               </td>
               <td align="center">Rp. {item.product.price}</td>
-              <td align="center">{item.product.stock}</td>
+              <td align="center">{item.product.stock - item.quantity}</td>
               <td align="center">{item.quantity}</td>
               <td align="center">Rp. {item.quantity * item.product.price}</td>
               <td>

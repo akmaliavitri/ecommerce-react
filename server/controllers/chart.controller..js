@@ -47,9 +47,6 @@ module.exports = {
     }
   },
 
-  // incrementItemQty: async () => {},
-  // decrementItemQty: async () => {},
-
   getChart: async (req, res) => {
     try {
       const chart = await Chart.findOne({ user: req.userData.id })
@@ -92,7 +89,6 @@ module.exports = {
   checkout: async (req, res) => {
     console.log(req.params.id, "id");
     console.log(req.body.quantity, "quantity");
-    // statusMessage(res, true, "success checkout item");
 
     try {
       const { id } = req.params;

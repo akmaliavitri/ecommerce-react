@@ -66,7 +66,7 @@ const CheckOut = () => {
                         <input
                           disabled={true}
                           className="form-control"
-                          value={item.product.stock}
+                          value={item.product.stock - item.quantity}
                         />
                       </div>
                       <div className="form-gorup">

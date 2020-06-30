@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor : '#FF613A'}}>
+      <nav
+        className="navbar navbar-expand-lg navbar-light"
+        style={{ backgroundColor: "#FF613A" }}
+      >
         <p className="navbar-brand">Ecommerce</p>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-
           <ul className="navbar-nav mr-auto">
             <Link to="/product">
               <li className="nav-item active">
@@ -36,10 +38,6 @@ const Navbar = () => {
               </button>
             </Link>
           </div>
-
-          {/* <button type="button" class="btn btn-primary">
-            Notifications <span class="badge badge-light">4</span>
-          </button> */}
 
           <div className="nav-logout">
             <Link to="/signin">
