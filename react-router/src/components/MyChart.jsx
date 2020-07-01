@@ -66,8 +66,8 @@ const MyChart = () => {
   };
 
   return (
-    <div>
-      <h2>MyChart</h2>
+    <div className="myChart">
+      <h2>MyChart</h2><br/>
       <table className="table">
         <thead className="thead-light">
           <tr>
@@ -102,7 +102,7 @@ const MyChart = () => {
               <td align="center">{item.quantity}</td>
               <td align="center">Rp. {item.quantity * item.product.price}</td>
               <td>
-                <div>
+                <div className="btnchart">
                   <div
                     className="btn-group"
                     role="group"

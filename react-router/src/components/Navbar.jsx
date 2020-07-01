@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
+      <div className="navbar-div">
       <nav
         className="navbar navbar-expand-lg navbar-light"
         style={{ backgroundColor: "#FF613A" }}
@@ -48,6 +49,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+    </div>
     </div>
   );
 };

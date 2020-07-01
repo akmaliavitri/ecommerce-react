@@ -20,6 +20,7 @@ const Product = () => {
     setProductList(data);
   };
 
+
   const destroyProduct = (_id) => {
     axios
       .delete(`http://localhost:4000/product/delete/${_id}`, {
@@ -39,7 +40,8 @@ const Product = () => {
 
   return (
     <div className="container">
-      <h2>Product List</h2>
+      <h2>Product List</h2><br />
+      
       <div className="cardProduct d-flex justify-content-center align-items-center">
         <div className="productList">
           {productList.map((product, index) => (
@@ -62,7 +64,7 @@ const Product = () => {
                   </Link>{" "}
                   <button
                     type="button"
-                    class="btn btn-danger"
+                    className="btn btn-danger"
                     onClick={() => destroyProduct(product._id)}
                   >
                     <i className="fa fa-trash" aria-hidden="true">
