@@ -114,11 +114,10 @@ const AddProduct = () => {
                       onChange={onChangeImage}
                     />
                   </div><br />
-
+                  
                   <button className="btn btn-primary" onClick={addNewProduct}>
                     Submit
                   </button>
-                  
                 </div>
               </div>
             </div>

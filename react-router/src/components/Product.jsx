@@ -40,10 +40,10 @@ const Product = () => {
 
   return (
     <div className="container">
-      <h2>Product List</h2><br />
       
-      <div className="cardProduct d-flex justify-content-center align-items-center">
-        <div className="productList">
+      <div className="cardProduct  justify-content-center align-items-center">
+      <h2>Product List</h2><br />
+        <div className="productList ">
           {productList.map((product, index) => (
             <div className="card " key={index}>
               <img src={product.image_url} className="card-img-top" alt="..." />

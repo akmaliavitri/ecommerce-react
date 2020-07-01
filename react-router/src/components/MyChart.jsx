@@ -67,7 +67,8 @@ const MyChart = () => {
 
   return (
     <div className="myChart">
-      <h2>MyChart</h2><br/>
+      <h2>MyChart</h2>
+      <br />
       <table className="table">
         <thead className="thead-light">
           <tr>
@@ -88,8 +89,8 @@ const MyChart = () => {
               <th>
                 <input type="checkbox" id="checkChcekout"></input>
               </th>
-              <th align="center">{index + 1}</th>
-              <td valign="center">{item.product.name}</td>
+              <th style={{ verticalAlign: "middle" }}>{index + 1}</th>
+              <td style={{ verticalAlign: "middle" }}>{item.product.name}</td>
               <td>
                 <img
                   src={item.product.image_url}
@@ -97,11 +98,11 @@ const MyChart = () => {
                   alt="..."
                 />
               </td>
-              <td align="center">Rp. {item.product.price}</td>
-              <td align="center">{item.product.stock - item.quantity}</td>
-              <td align="center">{item.quantity}</td>
-              <td align="center">Rp. {item.quantity * item.product.price}</td>
-              <td>
+              <td style={{ verticalAlign: "middle" }}>Rp. {item.product.price}</td>
+              <td style={{ verticalAlign: "middle" }}>{item.product.stock - item.quantity}</td>
+              <td style={{ verticalAlign: "middle" }}>{item.quantity}</td>
+              <td style={{ verticalAlign: "middle" }}>Rp. {item.quantity * item.product.price}</td>
+              <td style={{ verticalAlign: "middle" }}>
                 <div className="btnchart">
                   <div
                     className="btn-group"
@@ -117,13 +118,13 @@ const MyChart = () => {
                       -
                     </button>
                     <div className="inputquantity">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="name-product"
-                      value={item.quantity}
-                      disabled
-                    />
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="name-product"
+                        value={item.quantity}
+                        disabled
+                      />
                     </div>
                     <button
                       style={{ backgroundColor: "#FF613A" }}
@@ -161,8 +162,6 @@ const MyChart = () => {
                       {/* Delete */}
                     </i>{" "}
                   </button>
-
-                  
                 </div>
               </td>
             </tr>

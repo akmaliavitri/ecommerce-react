@@ -40,13 +40,13 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="nav-logout">
+          {/* <div className="nav-logout">
             <Link to="/signin">
               <button className="btn btn-dark" id="nav-btn-logout">
                 Logout
               </button>
             </Link>
-          </div>
+          </div> */}
         </div>
       </nav>
     </div>
