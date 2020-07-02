@@ -1,27 +1,33 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import Navbar from './Navbar'
 
 const MyChart = () => {
-  const [charItems, setChartItems] = useState([]);
+  const [chartItems, setChartItems] = useState([]);
   const [chartId, setChartId] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  // const [isCheck, setCheck] = useState(false)
+  const [isFetching, setIsFatching] = useState(false)
 
   useEffect(() => {
     getItemData();
-  }, []);
+  }, [chartItems.length]);
 
   const getItemData = async () => {
+
+    setIsFatching(true)
     const {
       data: { data },
     } = await Axios.get("http://localhost:4000/chart", {
       headers: { access_token: localStorage.getItem("access_token") },
     });
-    console.log(data, "dataaaaaa");
-    setChartId(data._id);
-    console.log(data._id, "setChartID");
+
+    if(data) {
+      setIsFatching(false)
+    }
+
     setChartItems(data.items);
+    setChartId(data._id);
   };
 
   const removeItem = (_id) => {
@@ -65,14 +71,30 @@ const MyChart = () => {
     getItemData();
   };
 
+  if (!localStorage.getItem("access_token")) {
+    return <Redirect to="/signin" />;
+  }
+
   return (
+    <>
+
+    <Navbar />
     <div className="myChart">
       <h2>MyChart</h2>
       <br />
+      {isFetching  ? (<div>
+        <img
+                src="https://thumbs.gfycat.com/UnhappyEnchantedBellsnake-small.gif"
+                className="card-img-top" id="loadingId"
+                alt="..."
+              />
+            </div>) : ( 
+        
+
       <table className="table">
         <thead className="thead-light">
           <tr>
-            <th scope="col">Check</th>
+            
             <th scope="col">No</th>
             <th scope="col">Name</th>
             <th scope="col">Image-Url</th>
@@ -84,11 +106,11 @@ const MyChart = () => {
           </tr>
         </thead>
         <tbody>
-          {charItems.map((item, index) => (
+          {chartItems.length === 0 ? (<tr><td colSpan = '8' >your chart is empty</td></tr>) : (
+          chartItems.map((item, index) => (
+            
             <tr key={index}>
-              <th>
-                <input type="checkbox" id="checkChcekout"></input>
-              </th>
+             
               <th style={{ verticalAlign: "middle" }}>{index + 1}</th>
               <td style={{ verticalAlign: "middle" }}>{item.product.name}</td>
               <td>
@@ -98,11 +120,17 @@ const MyChart = () => {
                   alt="..."
                 />
               </td>
-              <td style={{ verticalAlign: "middle" }}>Rp. {item.product.price}</td>
-              <td style={{ verticalAlign: "middle" }}>{item.product.stock - item.quantity}</td>
-              <td style={{ verticalAlign: "middle" }}>{item.quantity}</td>
-              <td style={{ verticalAlign: "middle" }}>Rp. {item.quantity * item.product.price}</td>
               <td style={{ verticalAlign: "middle" }}>
+                Rp. {item.product.price}
+              </td>
+              <td style={{ verticalAlign: "middle" }}>
+                {item.product.stock - item.quantity}
+              </td>
+              <td style={{ verticalAlign: "middle" }}>{item.quantity}</td>
+              <td style={{ verticalAlign: "middle" }}>
+                Rp. {item.quantity * item.product.price}
+              </td>
+              <td>
                 <div className="btnchart">
                   <div
                     className="btn-group"
@@ -118,13 +146,7 @@ const MyChart = () => {
                       -
                     </button>
                     <div className="inputquantity">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="name-product"
-                        value={item.quantity}
-                        disabled
-                      />
+                    <label className="inputmanual">{item.quantity}</label>
                     </div>
                     <button
                       style={{ backgroundColor: "#FF613A" }}
@@ -154,7 +176,7 @@ const MyChart = () => {
 
                   <button
                     type="button"
-                    class="btn btn-danger"
+                    className="btn btn-danger"
                     onClick={() => removeItem(item.product._id)}
                   >
                     <i className="fa fa-trash" aria-hidden="true">
@@ -165,14 +187,14 @@ const MyChart = () => {
                 </div>
               </td>
             </tr>
-          ))}
+          )))}
         </tbody>
-        <div>
-          <i>Checkout All</i>
-        </div>
       </table>
+      )}
     </div>
+  </>
   );
+
 };
 
 export default MyChart;

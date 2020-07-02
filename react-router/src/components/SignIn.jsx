@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect} from "react-router-dom";
 
 import axios from "axios";
 
@@ -45,9 +45,10 @@ const SignIn = () => {
       <div>
         <div className="container">
           <div className="container-login">
-            <div className="row justify-content-center">
-              <div className="col-md-6">
-                <div className="card p-4">
+            <div className="row justify-content-center align-items-center">
+             <div className="login-center">
+             <div className="col-md-6">
+                <div className="card p-4"  style={{ backgroundColor: "#FF613A" }}>
                   <div className="card-body">
                     <h2>Sign in Page</h2>
                   </div>
@@ -61,7 +62,7 @@ const SignIn = () => {
                       value={email}
                       onChange={onChangeEmail}
                     />
-                  </div>
+                  </div><br />
 
                   <div className="form-gorup">
                     <label> Password :</label>
@@ -73,7 +74,7 @@ const SignIn = () => {
                       value={password}
                       onChange={onChangePassword}
                     />
-                  </div>
+                  </div><br />
 
                   <button className="btn btn-primary" onClick={login}>
                     Sign In
@@ -81,6 +82,7 @@ const SignIn = () => {
                   <Link to="/signup">Don't have an account ?</Link>
                 </div>
               </div>
+             </div>
             </div>
           </div>
         </div>

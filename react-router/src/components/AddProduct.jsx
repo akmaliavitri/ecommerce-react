@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import Navbar from './Navbar'
 
 const AddProduct = () => {
   const [name, setName] = useState("");
@@ -59,7 +60,7 @@ const AddProduct = () => {
   return (
     <Fragment>
       {redirect && <Redirect to="/product" />}
-
+      <Navbar />
       <div>
         <div className="container-add">
           <div className="container-AddProduct">

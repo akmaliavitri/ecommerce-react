@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { useLocation, Redirect } from "react-router-dom";
 import axios from "axios";
+import Navbar from './Navbar'
 
 const CheckOut = () => {
   const { state } = useLocation();
@@ -28,6 +29,7 @@ const CheckOut = () => {
   return (
     <Fragment>
       {redirect && <Redirect to="/myChart" />}
+    <Navbar />
 
       <div>
         <div className="container-regis">

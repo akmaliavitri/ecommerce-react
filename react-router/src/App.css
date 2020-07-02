@@ -54,9 +54,9 @@
   height: 220px;
 }
 
-.card{
+.card {
   width: 18rem;
-} 
+}
 
 .nav-chart {
   margin-left: 9px;
@@ -83,7 +83,6 @@
 } */
 
 .wrapper {
- 
   border-radius: 2%;
   padding: 2%;
 }
@@ -99,7 +98,7 @@
   grid-template-columns: repeat(4, 1fr);
   grid-row-gap: 15px;
   grid-column-gap: 15px;
-  padding-bottom:5%;
+  padding-bottom: 5%;
 }
 
 .cardProduct {
@@ -109,11 +108,10 @@
 
 .myChart {
   padding-top: 5%;
-  z-index:-1;
+  z-index: -1;
 }
 
-
-.imagecheckout{
+.imagecheckout {
   padding-top: 10%;
 }
 
@@ -140,6 +138,23 @@
   z-index: 9;
 }
 
-.btnchart{
+.btnchart {
   z-index: -1;
+}
+
+.colspanTd {
+  column-span: 3;
+  font-style: italic;
+}
+
+.login-center {
+  padding-top: 14%;
+}
+
+.loadingId {
+  width: 250%
+}
+
+.inputmanual {
+  padding-top: 18%;
 }

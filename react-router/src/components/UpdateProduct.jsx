@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import Navbar from './Navbar'
 
 const UpdateProduct = (props) => {
   const [name, setName] = useState("");
@@ -49,6 +50,8 @@ const UpdateProduct = (props) => {
   };
 
   return (
+    <>
+    <Navbar />
     <div>
         <div className="container-update">
           <div className="container-updateProduct">
@@ -108,6 +111,7 @@ const UpdateProduct = (props) => {
           </div>
         </div>
     </div>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
+import Navbar from './Navbar'
 
 const Chart = () => {
   const [quantity, setQuantity] = useState(1);
@@ -31,6 +32,8 @@ const Chart = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div>
       <div className="container-regis ">
         <div className="container px-lg-5 d-flex justify-content-center align-items-center">
@@ -91,6 +94,7 @@ const Chart = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
