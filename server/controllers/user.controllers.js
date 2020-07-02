@@ -35,6 +35,7 @@ module.exports = {
               id: user._id,
               username: user.username,
               email: user.email,
+              role: user.role
             },
             secretKey
           );
@@ -43,6 +44,7 @@ module.exports = {
             id: user._id,
             token,
           };
+          
           statusMessage(res, true, 'success sign in', payload)
         } else {
           statusMessage(res, false, "wrong email / password", null);

@@ -66,6 +66,7 @@ const UpdateProduct = (props) => {
                       className="form-control"
                       id="name-product"
                       placeholder="ex : mobil"
+                      value = {name}
                       onChange={onChangeName}
                     />
                   </div>

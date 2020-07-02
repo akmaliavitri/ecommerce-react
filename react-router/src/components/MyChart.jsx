@@ -45,20 +45,22 @@ const MyChart = () => {
   };
 
   const inCreament = async (item) => {
-    await Axios.put(
-      `http://localhost:4000/chart/increament/${chartId}/update/${item.product._id}`,
-      {
-        quantity,
-      },
-      {
-        headers: { access_token: localStorage.getItem("access_token") },
-      }
-    );
+    if(item.product.stock > 0) {
+      await Axios.put(
+        `http://localhost:4000/chart/increament/${chartId}/update/${item.product._id}`,
+        {
+          quantity,
+        },
+        {
+          headers: { access_token: localStorage.getItem("access_token") },
+        }
+      );
+    }
     getItemData();
   };
 
   const decCrement = async (item) => {
-    console.log(item);
+    
     await Axios.put(
       `http://localhost:4000/chart/decrement/${chartId}/update/${item.product._id}`,
       {
